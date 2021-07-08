@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Java.MainPage">
+
+    <ImageView
+        android:id="@+id/titleBar3"
+        android:layout_width="300dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginFirstPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.329"
+        app:srcCompat="@drawable/title" />
+
+    <Button
+        android:id="@+id/seaAnimals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/buttons_main_page"
+        android:onClick="animalSelection"
+        android:text="Sea Animals"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleBar3" />
+
+    <Button
+        android:id="@+id/arthropoda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/buttons_main_page"
+        android:onClick="animalSelection"
+        android:text="Arthropoda"
+        app:layout_constraintStart_toStartOf="@+id/reptiles"
+        app:layout_constraintTop_toBottomOf="@+id/reptiles" />
+
+    <Button
+        android:id="@+id/birds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons_main_page"
+        android:onClick="animalSelection"
+        android:text="Birds"
+        app:layout_constraintBaseline_toBaselineOf="@+id/reptiles"
+        app:layout_constraintEnd_toEndOf="@+id/mammals" />
+
+    <Button
+        android:id="@+id/reptiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/buttons_main_page"
+        android:onClick="animalSelection"
+        android:text="Reptiles"
+        app:layout_constraintStart_toStartOf="@+id/seaAnimals"
+        app:layout_constraintTop_toBottomOf="@+id/seaAnimals" />
+
+    <Button
+        android:id="@+id/mammals"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/buttons_main_page"
+        android:onClick="animalSelection"
+        android:text="Mammals"
+        app:layout_constraintBaseline_toBaselineOf="@+id/seaAnimals"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <FrameLayout
+        android:id="@+id/animalFrag"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foregroundGravity="top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleBar3">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/addAnimalFrag"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
