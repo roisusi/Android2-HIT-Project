@@ -12,9 +12,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.rrszoo.R
 import devdeeds.com.rrszoo.Fragments.FragmentLogin
 import devdeeds.com.rrszoo.Fragments.FragmentRegister
-import devdeeds.com.rrszoo.R
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

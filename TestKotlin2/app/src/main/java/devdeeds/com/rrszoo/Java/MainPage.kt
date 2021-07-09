@@ -18,11 +18,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.rrszoo.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import devdeeds.com.rrszoo.Fragments.FragmentAddAnimal
 import devdeeds.com.rrszoo.Fragments.FragmentAnimals
-import devdeeds.com.rrszoo.R
-import kotlinx.android.synthetic.main.*
 import java.util.*
 
 
