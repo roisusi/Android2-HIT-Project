@@ -1,4 +1,4 @@
-package devdeeds.com.rrszoo.Java
+package devdeeds.com.rrszoo.Kotlin
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
@@ -8,17 +8,17 @@ class ZooLanguage internal constructor(  // false equals hebrew
     private val sharedPreferences: SharedPreferences
 ) {
     private val editore: Editor
-    public val isEnglish: Boolean
+    val isEnglish: Boolean
         public get() = sharedPreferences.getBoolean("language", true)
 
     @SuppressLint("NewApi")
-    public fun setEnglish() {
+    fun setEnglish() {
         editore.putBoolean("language", true)
         editore.apply()
     }
 
     @SuppressLint("NewApi")
-    public fun setHebrew() {
+    fun setHebrew() {
         editore.putBoolean("language", false)
         editore.apply()
     }

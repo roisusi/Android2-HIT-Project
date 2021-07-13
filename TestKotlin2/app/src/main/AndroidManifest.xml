@@ -27,7 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RRsZoo"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name="devdeeds.com.rrszoo.Java.AccountInfo"></activity>
+        <activity android:name="devdeeds.com.rrszoo.RecyclervView.LanguagesRecyclerView"></activity>
+        <activity android:name="devdeeds.com.rrszoo.Kotlin.Settings" />
+        <activity android:name="devdeeds.com.rrszoo.Kotlin.AccountInfo" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -60,14 +62,14 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="devdeeds.com.rrszoo.Java.MainPage" />
+        <activity android:name="devdeeds.com.rrszoo.Kotlin.MainPage" />
         <activity
-            android:name="devdeeds.com.rrszoo.Java.AnimalPage"
+            android:name="devdeeds.com.rrszoo.Kotlin.AnimalPage"
             android:label="@string/title_activity_main_page"
             android:theme="@style/Theme.RRsZoo.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="devdeeds.com.rrszoo.Java.MainActivity"
+            android:name="devdeeds.com.rrszoo.Kotlin.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>

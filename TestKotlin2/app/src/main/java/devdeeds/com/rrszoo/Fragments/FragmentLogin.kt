@@ -14,7 +14,7 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
-import devdeeds.com.rrszoo.Java.GetInformation
+import devdeeds.com.rrszoo.Kotlin.GetInformation
 import java.util.*
 
 /**

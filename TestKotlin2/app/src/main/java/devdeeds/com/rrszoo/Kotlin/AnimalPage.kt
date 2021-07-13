@@ -1,4 +1,4 @@
-package devdeeds.com.rrszoo.Java
+package devdeeds.com.rrszoo.Kotlin
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -44,6 +44,7 @@ class AnimalPage : AppCompatActivity() {
     private var messageToServer: MutableList<String?>? = null
     private val AnimalMessage: List<String>? = null
     private var mt: GetInformation? = null
+
     var imageContentTarget: com.squareup.picasso.Target = object : com.squareup.picasso.Target {
         override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
             val sharePhoto: SharePhoto = SharePhoto.Builder()

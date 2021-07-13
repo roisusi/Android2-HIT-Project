@@ -1,4 +1,4 @@
-package devdeeds.com.rrszoo.Java;
+package devdeeds.com.rrszoo.Kotlin;
 
 import android.app.Activity;
 import android.content.DialogInterface;

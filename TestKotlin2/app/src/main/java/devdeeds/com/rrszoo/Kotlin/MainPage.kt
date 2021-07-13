@@ -1,4 +1,4 @@
-package devdeeds.com.rrszoo.Java
+package devdeeds.com.rrszoo.Kotlin
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -257,6 +257,10 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
                 intent.putExtra("Logout", logout)
                 logOut()
                 editor!!.apply()
+                startActivity(intent)
+            }
+            R.id.settings ->{
+                intent = Intent(applicationContext, Settings::class.java)
                 startActivity(intent)
             }
             R.id.Hebrew -> {
