@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
@@ -48,11 +49,14 @@ class FragmentAnimals : Fragment {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(
+        val view: View = inflater.inflate(
             if (isEnglish) R.layout.fragment_animals else R.layout.fragment_animals_heb,
             container,
             false
-        )
+        );
+        var select = view.findViewById<Button>(R.id.selectAnimal)
+        select.setText("Angular")
+        return view;
     }
 
     companion object {

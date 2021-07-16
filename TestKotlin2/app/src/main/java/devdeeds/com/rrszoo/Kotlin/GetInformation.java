@@ -27,7 +27,7 @@ public class GetInformation extends AsyncTask<String,Void,String>
 {
 
     private static final String TAG = "GetInformation";
-    private static String ip = "10.0.2.2";
+    private static String ip = "10.0.0.11";
     private static String okMessage="";
     private static List<String> backFromServer;
     private static List<String> sendToServer;
