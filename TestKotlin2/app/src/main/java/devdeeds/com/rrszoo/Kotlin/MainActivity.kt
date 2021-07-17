@@ -35,12 +35,12 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
-        setContentView(if (zooLanguage?.isEnglish == true) R.layout.activity_main else R.layout.activity_main_heb)
+        setContentView(if (zooLanguage?.isLTRLanguage == true) R.layout.activity_main else R.layout.activity_main_heb)
         login = findViewById<View>(R.id.loginFirstPage) as Button
         register = findViewById<View>(R.id.registerFirstPage) as Button
         title = findViewById<View>(R.id.titleBar) as ImageView
         messageToServer = ArrayList()
-        fragmentLogin = FragmentLogin(zooLanguage?.isEnglish)
+        fragmentLogin = FragmentLogin(zooLanguage?.isLTRLanguage)
 
         //Hide the Menu Bar
         supportActionBar!!.hide()
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     fun registerUser(view: View?) {
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.fragmentReg, FragmentRegister(zooLanguage?.isEnglish == true))
+        fragmentTransaction!!.add(R.id.fragmentReg, FragmentRegister(zooLanguage?.isLTRLanguage == true))
             .addToBackStack(null).commit()
         login!!.visibility = View.INVISIBLE
         register!!.visibility = View.INVISIBLE
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         val login = findViewById<View>(R.id.loginReg) as EditText
         val pass = findViewById<View>(R.id.passReg) as EditText
         val email = findViewById<View>(R.id.emailReg) as EditText
-        if (zooLanguage!!.isEnglish) {
+        if (zooLanguage!!.isLTRLanguage) {
             messageToServer!!.add("En")
         } else {
             messageToServer!!.add("He")

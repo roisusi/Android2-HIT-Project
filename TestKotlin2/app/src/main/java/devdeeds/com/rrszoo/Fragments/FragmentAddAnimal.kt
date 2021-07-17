@@ -16,7 +16,7 @@ import com.example.rrszoo.R
  * create an instance of this fragment.
  */
 class FragmentAddAnimal : Fragment {
-    var isEnglish = true
+    var isLTRLanguage = true
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -28,8 +28,8 @@ class FragmentAddAnimal : Fragment {
         // Required empty public constructor
     }
 
-    constructor(isEnglish: Boolean) {
-        this.isEnglish = isEnglish
+    constructor(isLTRLanguage: Boolean) {
+        this.isLTRLanguage = isLTRLanguage
         // Required empty public constructor
     }
 
@@ -50,7 +50,7 @@ class FragmentAddAnimal : Fragment {
     ): View? {
         // Inflate the layout for this fragment
         val v: View = inflater.inflate(
-            if (isEnglish) R.layout.fragment_add_animal else R.layout.fragment_add_animal_heb,
+            if (isLTRLanguage) R.layout.fragment_add_animal else R.layout.fragment_add_animal_heb,
             container,
             false
         )

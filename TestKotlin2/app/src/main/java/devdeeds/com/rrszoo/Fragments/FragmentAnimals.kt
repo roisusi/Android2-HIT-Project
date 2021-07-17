@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
+import com.google.mlkit.nl.translate.TranslateLanguage
+import devdeeds.com.rrszoo.Kotlin.ZooLanguage
+import devdeeds.com.rrszoo.Kotlin.ZooTranslator
 
 
 /**
@@ -16,7 +20,8 @@ import com.example.rrszoo.R
  * create an instance of this fragment.
  */
 class FragmentAnimals : Fragment {
-    var isEnglish = true
+    var isLTRLanguage = true
+    var language: String = TranslateLanguage.ENGLISH
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -27,9 +32,10 @@ class FragmentAnimals : Fragment {
         // Required empty public constructor
     }
 
-    constructor(isEnglish: Boolean) {
+    constructor(isLTRLanguage: Boolean, language: String) {
         // Required empty public constructor
-        this.isEnglish = isEnglish
+        this.isLTRLanguage = isLTRLanguage
+        this.language = language
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,12 +56,13 @@ class FragmentAnimals : Fragment {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(
-            if (isEnglish) R.layout.fragment_animals else R.layout.fragment_animals_heb,
+            if (isLTRLanguage) R.layout.fragment_animals else R.layout.fragment_animals_heb,
             container,
             false
         );
         var select = view.findViewById<Button>(R.id.selectAnimal)
-        select.setText("Angular")
+        ZooTranslator.translate("Select", language)
+        select.setText("good")
         return view;
     }
 

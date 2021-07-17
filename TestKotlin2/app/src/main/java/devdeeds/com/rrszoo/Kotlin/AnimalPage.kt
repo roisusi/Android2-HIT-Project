@@ -80,7 +80,7 @@ class AnimalPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
-        setContentView(if (zooLanguage?.isEnglish == true) R.layout.animalpage else R.layout.animalpage_heb)
+        setContentView(if (zooLanguage?.isLTRLanguage == true) R.layout.animalpage else R.layout.animalpage_heb)
         messageToServer = ArrayList()
         gettingExtraAnimal = intent.getStringExtra("Animal")
         Log.e(
@@ -107,7 +107,7 @@ class AnimalPage : AppCompatActivity() {
 
     private val fromDB: Unit
         private get() {
-            if (zooLanguage!!.isEnglish) {
+            if (zooLanguage!!.isLTRLanguage) {
                 messageToServer!!.add("En")
             } else {
                 messageToServer!!.add("He")
