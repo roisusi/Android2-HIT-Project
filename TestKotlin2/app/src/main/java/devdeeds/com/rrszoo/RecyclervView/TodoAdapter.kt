@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rrszoo.R
+import devdeeds.com.rrszoo.Kotlin.ZooLanguage
+import devdeeds.com.rrszoo.Kotlin.ZooTranslator
 import kotlinx.android.synthetic.main.item_todo.*
 import kotlinx.android.synthetic.main.item_todo.view.*
 
@@ -31,14 +34,9 @@ class TodoAdapter(
         holder.itemView.apply {
             lanButton.text = todos[position].nameOfButtonLanguage
 
-
-            //                                                  //
-            // When you Click on Button is say what you clicked //
-            //                                                  //
-
             lanButton.setOnClickListener {
+                todos[position].zooLanguage.setLanguage(todos[position].lang)
                 Toast.makeText(this.context,"You click on ${lanButton.text}",Toast.LENGTH_SHORT).show()
-
             }
 
 

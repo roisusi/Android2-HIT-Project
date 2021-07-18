@@ -19,6 +19,7 @@ class ZooLanguage internal constructor(  // false equals hebrew
 
     @SuppressLint("NewApi")
     fun setLanguage(lang: String) {
+        ZooTranslator.downloadModule(lang)
         editore.putString("language", lang)
         editore.apply()
     }

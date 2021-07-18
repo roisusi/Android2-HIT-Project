@@ -24,7 +24,7 @@ import java.util.List;
 public class SendInformation extends AsyncTask<String,Void,String> {
 
     private static final String TAG = "sendInformation";
-    private static final String ip = "10.0.0.11";
+    private static final String ip = "10.0.0.4";
     private static String okMessage="";
     private static List<String> backFromServer;
     private static List<String> sendToServer;
