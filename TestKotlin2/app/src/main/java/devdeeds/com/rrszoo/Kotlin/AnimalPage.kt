@@ -95,7 +95,7 @@ class AnimalPage : AppCompatActivity() {
         )
         val backToAnimalSelection = findViewById<View>(R.id.backAnimal) as Button
         backToAnimalSelection.setOnClickListener {
-            val intent = Intent(applicationContext, MainPage::class.java)
+            val intent = Intent(applicationContext, MainPageOfAnimalChoose::class.java)
             intent.putExtra("Admin", gettingExtraAdmin)
             startActivity(intent)
         }

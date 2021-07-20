@@ -62,10 +62,10 @@ class GetInformation(message: ArrayList<String?>, activity: Activity) {
 
     fun openActivity() {
         Log.e(TAG, "onPostExecute: pre " + okMessage)
-        if (activity is MainActivity && backFromServer.isEmpty()) {
+        if (activity is FirstLoginPage && backFromServer.isEmpty()) {
             openLoginAlert()
-        } else if (activity is MainActivity) {
-            val activity = activity as MainActivity?
+        } else if (activity is FirstLoginPage) {
+            val activity = activity as FirstLoginPage?
             activity!!.postLogin(backFromServer)
         }
 
@@ -75,9 +75,9 @@ class GetInformation(message: ArrayList<String?>, activity: Activity) {
             activity!!.SetAnimalFromDataBase(backFromServer)
         }
 
-        if (activity is MainPage && backFromServer.isEmpty()) {
-        } else if (activity is MainPage) {
-            val activity = activity as MainPage?
+        if (activity is MainPageOfAnimalChoose && backFromServer.isEmpty()) {
+        } else if (activity is MainPageOfAnimalChoose) {
+            val activity = activity as MainPageOfAnimalChoose?
             activity!!.fillArrayToSpinner(backFromServer)
         }
 

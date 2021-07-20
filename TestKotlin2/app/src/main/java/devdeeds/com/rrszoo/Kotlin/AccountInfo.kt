@@ -30,7 +30,7 @@ class AccountInfo : AppCompatActivity() {
     }
 
     fun backAcc(view: View?) {
-        val intent = Intent(applicationContext, MainPage::class.java)
+        val intent = Intent(applicationContext, MainPageOfAnimalChoose::class.java)
         intent.putExtra("Admin", stringFromServer!![2])
         startActivity(intent)
     }

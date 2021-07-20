@@ -69,23 +69,23 @@ class SendInformation(message: ArrayList<String?>, activity: Activity) {
     fun openActivity() {
 
         Log.e(TAG, "onPostExecute: pre " + okMessage)
-        if (activity is MainActivity && backFromServer.isEmpty()) {
+        if (activity is FirstLoginPage && backFromServer.isEmpty()) {
             openLoginAlert()
-        } else if (activity is MainActivity && backFromServer[0] == "OK") {
-            val activity = activity as MainActivity
+        } else if (activity is FirstLoginPage && backFromServer[0] == "OK") {
+            val activity = activity as FirstLoginPage
             Toast.makeText(activity, "Registration Success", Toast.LENGTH_LONG).show()
             activity.backToMain(view)
-        } else if (activity is MainActivity && backFromServer[0] == "NOT OK") {
+        } else if (activity is FirstLoginPage && backFromServer[0] == "NOT OK") {
             Toast.makeText(activity, "User Already Exist", Toast.LENGTH_LONG).show()
         }
 
-        if (activity is MainPage && backFromServer.isEmpty()) {
+        if (activity is MainPageOfAnimalChoose && backFromServer.isEmpty()) {
             openLoginAlert()
-        } else if (activity is MainPage && backFromServer[0] == "OK") {
-            val activity = activity as MainPage
+        } else if (activity is MainPageOfAnimalChoose && backFromServer[0] == "OK") {
+            val activity = activity as MainPageOfAnimalChoose
             Toast.makeText(activity, "Add Success", Toast.LENGTH_LONG).show()
             activity.backToAnimalMenu(view)
-        } else if (activity is MainPage && backFromServer[0] == "NOT OK") {
+        } else if (activity is MainPageOfAnimalChoose && backFromServer[0] == "NOT OK") {
             Toast.makeText(activity, "Animal Already Exist", Toast.LENGTH_LONG).show()
         }
 

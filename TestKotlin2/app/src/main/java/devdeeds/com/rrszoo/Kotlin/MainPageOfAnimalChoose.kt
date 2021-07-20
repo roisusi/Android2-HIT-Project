@@ -26,7 +26,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainPage : AppCompatActivity(), OnItemSelectedListener {
+class MainPageOfAnimalChoose : AppCompatActivity(), OnItemSelectedListener {
     private var seaAnimal: Button? = null
     private var mammals: Button? = null
     private var reptalis: Button? = null
@@ -217,7 +217,7 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
             messageToServer!!.add(food.text.toString())
             messageToServer!!.add(childrens.text.toString())
             messageToServer!!.add(img.text.toString())
-            sendInformation = SendInformation(messageToServer!!, this@MainPage)
+            sendInformation = SendInformation(messageToServer!!, this@MainPageOfAnimalChoose)
             //sendInformation?.execute()
             sendInformation!!.connect()
         }
@@ -257,7 +257,7 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
                 startActivity(intent)
             }
             R.id.logout -> {
-                intent = Intent(applicationContext, MainActivity::class.java)
+                intent = Intent(applicationContext, FirstLoginPage::class.java)
                 logout = "Logout"
                 intent.putExtra("Logout", logout)
                 logOut()
@@ -293,11 +293,11 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
     }
 
     fun openLoginAlert() {
-        val alertDialogBuilder = AlertDialog.Builder(this@MainPage)
+        val alertDialogBuilder = AlertDialog.Builder(this@MainPageOfAnimalChoose)
         alertDialogBuilder.setMessage("One or More cells are empty")
         alertDialogBuilder.setPositiveButton(
             "Ok"
-        ) { arg0, arg1 -> Toast.makeText(this@MainPage, "Fill all Text", Toast.LENGTH_LONG).show() }
+        ) { arg0, arg1 -> Toast.makeText(this@MainPageOfAnimalChoose, "Fill all Text", Toast.LENGTH_LONG).show() }
 
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()

@@ -18,7 +18,7 @@ import devdeeds.com.rrszoo.Fragments.FragmentRegister
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class FirstLoginPage : AppCompatActivity() {
     private var fragmentManager: FragmentManager? = null
     private var fragmentTransaction: FragmentTransaction? = null
     private var login: Button? = null
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         messageToServer!!.add(pass.text.toString())
         messageToServer!!.add("false")
         messageToServer!!.add(email.text.toString())
-        sendInformation = SendInformation(messageToServer!!, this@MainActivity, view)
+        sendInformation = SendInformation(messageToServer!!, this@FirstLoginPage, view)
         sendInformation!!.connect()
     }
 
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         stringFromServer = s
         Log.e(TAG, "test: $stringFromServer")
         if (fragmentLogin!!.rememberLogin(logout)) {
-            val intent = Intent(this, MainPage::class.java).apply {
+            val intent = Intent(this, MainPageOfAnimalChoose::class.java).apply {
                 putExtra("Admin", stringFromServer!![2])
             }
 
