@@ -42,7 +42,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/buttons_main_page"
         android:onClick="animalSelection"
-        android:text="Arthropoda"
+        android:text="Insects"
         app:layout_constraintStart_toStartOf="@+id/reptiles"
         app:layout_constraintTop_toBottomOf="@+id/reptiles" />
 

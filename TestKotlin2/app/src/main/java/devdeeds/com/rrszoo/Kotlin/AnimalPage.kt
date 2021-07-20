@@ -124,7 +124,7 @@ class AnimalPage : AppCompatActivity() {
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!, zooLanguage, arrayListOf())).commit()
 
 
 

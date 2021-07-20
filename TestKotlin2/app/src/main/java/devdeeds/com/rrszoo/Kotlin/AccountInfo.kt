@@ -1,10 +1,8 @@
 package devdeeds.com.rrszoo.Kotlin
 
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -51,7 +49,7 @@ class AccountInfo : AppCompatActivity() {
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!, zooLanguage, arrayListOf())).commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {

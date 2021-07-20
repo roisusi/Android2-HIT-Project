@@ -26,6 +26,7 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Fragments.FragmentAddAnimal
 import devdeeds.com.rrszoo.Fragments.FragmentAnimals
+import kotlinx.android.synthetic.main.main_page.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,7 +36,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     private var mammals: Button? = null
     private var reptalis: Button? = null
     private var birds: Button? = null
-    private var artth: Button? = null
+    private var arthropoda: Button? = null
     private var fragmentManager: FragmentManager? = null
     private var fragmentTransaction: FragmentTransaction? = null
     private var spinnerAnimals: Spinner? = null
@@ -60,6 +61,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
 
 
 
+    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         editor = getSharedPreferences("RRsZoo", MODE_PRIVATE).edit()
@@ -71,16 +73,9 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         mammals = findViewById<View>(R.id.mammals) as Button
         reptalis = findViewById<View>(R.id.reptiles) as Button
         birds = findViewById<View>(R.id.birds) as Button
-        artth = findViewById<View>(R.id.arthropoda) as Button
+        arthropoda = findViewById<View>(R.id.arthropoda) as Button
         animal = ArrayList()
         messageToServer = ArrayList()
-        toogle = findViewById<Switch>(R.id.swithLanguages)
-        toogle?.setOnClickListener {
-            if (toogle!!.isChecked) {
-                ZooTranslator.translate("mammals", zooLanguage!!.getLang(), mammals!!)
-            }
-        }
-
 
 
 
@@ -102,17 +97,30 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             fab?.setVisibility(View.INVISIBLE)
         }
 
-
-        //Make Language Fragments All the Time
-        fragmentManager = supportFragmentManager
-        fragmentTransaction = fragmentManager!!.beginTransaction()
-        Log.e(TAG, "Main Page $switchStringLanguage", )
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
-
         //actionbar
         actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "Main Page"
+        val abc = actionbar
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        Log.e(TAG, "Main Page $switchStringLanguage", )
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,
+            zooLanguage!!,
+            arrayListOf<TranslateObject>(
+                TranslateObject(mammals!!, mammals?.text.toString()),
+                TranslateObject(seaAnimal!!, seaAnimal?.text.toString()),
+                TranslateObject(reptalis!!, reptalis?.text.toString()),
+                TranslateObject(birds!!, birds?.text.toString()),
+                TranslateObject(arthropoda!!, arthropoda?.text.toString())
+                ),
+            abc
+        )).commit()
+
+        actionbar = supportActionBar
+
+
 
     }
 
@@ -162,7 +170,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         mammals!!.visibility = View.VISIBLE
         reptalis!!.visibility = View.VISIBLE
         birds!!.visibility = View.VISIBLE
-        artth!!.visibility = View.VISIBLE
+        arthropoda!!.visibility = View.VISIBLE
         showFab()
         supportActionBar!!.show()
         actionbar!!.setDisplayHomeAsUpEnabled(false)
@@ -198,7 +206,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         mammals!!.visibility = View.INVISIBLE
         reptalis!!.visibility = View.INVISIBLE
         birds!!.visibility = View.INVISIBLE
-        artth!!.visibility = View.INVISIBLE
+        arthropoda!!.visibility = View.INVISIBLE
         fab!!.visibility = View.INVISIBLE
     }
 
@@ -217,7 +225,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         mammals!!.visibility = View.INVISIBLE
         reptalis!!.visibility = View.INVISIBLE
         birds!!.visibility = View.INVISIBLE
-        artth!!.visibility = View.INVISIBLE
+        arthropoda!!.visibility = View.INVISIBLE
 
         actionbar!!.setDisplayHomeAsUpEnabled(true)
         actionbar!!.setDisplayHomeAsUpEnabled(true)

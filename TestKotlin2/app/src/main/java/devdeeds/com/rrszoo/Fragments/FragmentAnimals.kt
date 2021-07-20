@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
 import com.google.mlkit.nl.translate.TranslateLanguage
-import devdeeds.com.rrszoo.Kotlin.ZooLanguage
 import devdeeds.com.rrszoo.Kotlin.ZooTranslator
 
 
