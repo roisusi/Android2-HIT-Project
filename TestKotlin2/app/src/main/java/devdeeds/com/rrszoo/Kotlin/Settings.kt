@@ -14,6 +14,8 @@ class Settings : AppCompatActivity() {
 
     private var languageSettingsButton: Button?=null
     private var accountInformationSettingsButton: Button?=null
+    var switchStringLanguage:String?="En"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,9 @@ class Settings : AppCompatActivity() {
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
         actionbar.setDisplayHomeAsUpEnabled(true)
+
+        if (intent.getStringExtra("Language") != null)
+            switchStringLanguage = intent.getStringExtra("Language")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -38,12 +43,14 @@ class Settings : AppCompatActivity() {
     }
 
     fun language(view: View){
-        val intent = Intent (this, LanguagesRecyclerView::class.java)
+        intent = Intent (this, LanguagesRecyclerView::class.java)
+        intent.putExtra("Language", switchStringLanguage)
         startActivity(intent)
     }
 
     fun accountInformation(view: View){
         intent = Intent(applicationContext, AccountInfo::class.java)
+        intent.putExtra("Language", switchStringLanguage)
         startActivity(intent)
     }
 

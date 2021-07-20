@@ -7,6 +7,15 @@
     android:background="@drawable/background"
     tools:context=".Java.AccountInfo">
 
+    <FrameLayout
+        android:id="@+id/languageFragment"
+        android:layout_width="85dp"
+        android:layout_height="37dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"

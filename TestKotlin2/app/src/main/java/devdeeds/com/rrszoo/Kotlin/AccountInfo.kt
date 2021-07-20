@@ -4,6 +4,7 @@ package devdeeds.com.rrszoo.Kotlin
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -11,7 +12,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
+import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,9 +23,14 @@ class AccountInfo : AppCompatActivity() {
     private var getInformation: GetInformation? = null
     private var messageToServer: ArrayList<String?>? = null
     private var stringFromServer: ArrayList<String?>? = null
+    private var fragmentManager: FragmentManager? = null
+    private var fragmentTransaction: FragmentTransaction? = null
     var zooLanguage: ZooLanguage? = null
     private var menu: Menu? = null
     private var inflater: MenuInflater? = null
+    var switchStringLanguage:String?="En"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
@@ -34,6 +43,14 @@ class AccountInfo : AppCompatActivity() {
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
         actionbar.setDisplayHomeAsUpEnabled(true)
+
+        if (intent.getStringExtra("Language") != null)
+            switchStringLanguage = intent.getStringExtra("Language")
+
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {

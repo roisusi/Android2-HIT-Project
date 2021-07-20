@@ -279,6 +279,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             }
             R.id.settings ->{
                 intent = Intent(applicationContext, Settings::class.java)
+                intent.putExtra("Language", switchStringLanguage)
                 startActivity(intent)
             }
             R.id.Hebrew -> {
