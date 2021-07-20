@@ -152,7 +152,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         messageToServer!!.add("Type")
         messageToServer!!.add(animal)
         getInformation = GetInformation(messageToServer!!, this)
-        //getInformation!!.execute()
         getInformation!!.connect()
     }
 
@@ -247,6 +246,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             val intent = Intent(applicationContext, AnimalPage::class.java)
             intent.putExtra("Animal", animal)
             intent.putExtra("Admin", gettingExtra)
+            intent.putExtra("Language", switchStringLanguage)
             startActivity(intent)
         }
     }
@@ -269,10 +269,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         val intent: Intent
         val logout: String
         when (id) {
-            R.id.account -> {
-                intent = Intent(applicationContext, AccountInfo::class.java)
-                startActivity(intent)
-            }
             R.id.logout -> {
                 intent = Intent(applicationContext, FirstLoginPage::class.java)
                 logout = "Logout"

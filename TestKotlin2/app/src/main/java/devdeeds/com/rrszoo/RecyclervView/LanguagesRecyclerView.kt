@@ -80,5 +80,17 @@ class LanguagesRecyclerView : AppCompatActivity() {
         languagesRcyView1.adapter = adapter
         languagesRcyView1.layoutManager = LinearLayoutManager(this)
 
+        //actionbar
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Settings"
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

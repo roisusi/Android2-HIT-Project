@@ -14,19 +14,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <Button
-        android:id="@+id/backAcc"
-        android:layout_width="152dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="180dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="backAcc"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/NameAcc"
         android:layout_width="wrap_content"

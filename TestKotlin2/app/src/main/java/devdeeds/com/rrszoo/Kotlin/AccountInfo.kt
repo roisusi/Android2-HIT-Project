@@ -27,13 +27,20 @@ class AccountInfo : AppCompatActivity() {
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
         setContentView(if (zooLanguage?.isEnglish == true) R.layout.activity_account_info else R.layout.activity_account_info_heb)
         accountInfo
+        //actionbar
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Settings"
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
     }
 
-    fun backAcc(view: View?) {
-        val intent = Intent(applicationContext, MainPageOfAnimalChoose::class.java)
-        intent.putExtra("Admin", stringFromServer!![2])
-        startActivity(intent)
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
+
 
     private val accountInfo: Unit
         @RequiresApi(Build.VERSION_CODES.GINGERBREAD) private get() {

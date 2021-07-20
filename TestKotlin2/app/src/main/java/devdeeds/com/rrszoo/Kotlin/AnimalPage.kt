@@ -14,6 +14,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -26,6 +28,7 @@ import com.facebook.share.model.SharePhoto
 import com.facebook.share.model.SharePhotoContent
 import com.facebook.share.widget.ShareDialog
 import com.squareup.picasso.Picasso
+import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import java.lang.Exception
 import kotlin.collections.ArrayList
 
@@ -36,6 +39,8 @@ class AnimalPage : AppCompatActivity() {
     var shareText = ""
     var imageUri = ""
     var zooLanguage: ZooLanguage? = null
+    private var fragmentManager: FragmentManager? = null
+    private var fragmentTransaction: FragmentTransaction? = null
     private var name: TextView? = null
     private var location: TextView? = null
     private var lifetime: TextView? = null
@@ -45,6 +50,8 @@ class AnimalPage : AppCompatActivity() {
     private var gettingExtraAdmin: String? = null
     private var messageToServer: ArrayList<String?>? = null
     private var mt: GetInformation? = null
+    var switchStringLanguage:String?="En"
+
 
     var imageContentTarget: com.squareup.picasso.Target = object : com.squareup.picasso.Target {
         override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
@@ -63,6 +70,7 @@ class AnimalPage : AppCompatActivity() {
                     .setContentUrl(Uri.parse(imageUri)).build()
                 shareDialog!!.show(linkContent)
             }
+
         }
 
         override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
@@ -99,6 +107,15 @@ class AnimalPage : AppCompatActivity() {
             intent.putExtra("Admin", gettingExtraAdmin)
             startActivity(intent)
         }
+
+
+        if (intent.getStringExtra("Language") != null)
+            switchStringLanguage = intent.getStringExtra("Language")
+
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
 
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);

@@ -39,6 +39,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/setting_button"
+        android:onClick="accountInformation"
         android:radius="300dp"
         android:text="Account Information"
         android:textAllCaps="false"
