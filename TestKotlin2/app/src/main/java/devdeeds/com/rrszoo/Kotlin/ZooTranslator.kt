@@ -19,8 +19,10 @@ class ZooTranslator {
                     .build()
             val translator: Translator = Translation.getClient(options)
             Thread {
-                Tasks.await(translator.downloadModelIfNeeded().addOnSuccessListener {
+                Tasks.await(translator.downloadModelIfNeeded()
+                        .addOnSuccessListener {
                 }.addOnFailureListener {
+                    System.out.println(it.toString())
                 });
             }.start()
         }
