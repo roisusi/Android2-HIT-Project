@@ -17,7 +17,6 @@ import kotlin.collections.ArrayList
 
 class AccountInfo : AppCompatActivity() {
     private var getInformation: GetInformation? = null
-    private val sendInformation: SendInformation? = null
     private var messageToServer: ArrayList<String?>? = null
     private var stringFromServer: ArrayList<String?>? = null
     var zooLanguage: ZooLanguage? = null
@@ -46,7 +45,6 @@ class AccountInfo : AppCompatActivity() {
             }
             messageToServer?.add("Account")
             getInformation = GetInformation(messageToServer!!, this@AccountInfo)
-            //getInformation?.execute()
             getInformation!!.connect()
         }
 

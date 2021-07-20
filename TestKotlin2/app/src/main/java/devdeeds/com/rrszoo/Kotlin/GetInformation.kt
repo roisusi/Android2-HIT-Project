@@ -97,14 +97,6 @@ class GetInformation(message: ArrayList<String?>, activity: Activity) {
         alertDialogBuilder.setMessage("You have Enter Wrong User/Password")
         alertDialogBuilder.setPositiveButton("Ok"
         ) { arg0, arg1 -> Toast.makeText(activity, "Try Again", Toast.LENGTH_LONG).show() }
-        /*
-              alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-                  @Override
-                  public void onClick(DialogInterface dialog, int which) {
-
-                  }
-              });
-      */
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }

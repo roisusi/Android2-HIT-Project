@@ -26,10 +26,8 @@ class MainActivity : AppCompatActivity() {
     private var title: ImageView? = null
     private var messageToServer: ArrayList<String?>? = null
     private var stringFromServer: ArrayList<String?>? = null
-    private val getInformation: GetInformation? = null
     private var sendInformation: SendInformation? = null
     private var fragmentLogin: FragmentLogin? = null
-    private var intent = null;
     private var logout: String? = null
     private var zooLanguage: ZooLanguage? = null
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
@@ -104,7 +102,6 @@ class MainActivity : AppCompatActivity() {
         messageToServer!!.add("false")
         messageToServer!!.add(email.text.toString())
         sendInformation = SendInformation(messageToServer!!, this@MainActivity, view)
-        //sendInformation?.execute()
         sendInformation!!.connect()
     }
 

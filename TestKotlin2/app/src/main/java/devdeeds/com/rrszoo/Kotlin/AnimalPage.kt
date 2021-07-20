@@ -44,7 +44,6 @@ class AnimalPage : AppCompatActivity() {
     private var gettingExtraAnimal: String? = null
     private var gettingExtraAdmin: String? = null
     private var messageToServer: ArrayList<String?>? = null
-    private val AnimalMessage: List<String>? = null
     private var mt: GetInformation? = null
 
     var imageContentTarget: com.squareup.picasso.Target = object : com.squareup.picasso.Target {
@@ -117,7 +116,6 @@ class AnimalPage : AppCompatActivity() {
             messageToServer!!.add("Animal")
             messageToServer!!.add(gettingExtraAnimal)
             mt = GetInformation(messageToServer!!, this)
-            //mt?.execute()
             mt!!.connect()
         }
 

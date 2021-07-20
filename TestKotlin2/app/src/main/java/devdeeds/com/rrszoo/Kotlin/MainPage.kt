@@ -298,14 +298,7 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
         alertDialogBuilder.setPositiveButton(
             "Ok"
         ) { arg0, arg1 -> Toast.makeText(this@MainPage, "Fill all Text", Toast.LENGTH_LONG).show() }
-        /*
-           alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
 
-               }
-           });
-   */
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }

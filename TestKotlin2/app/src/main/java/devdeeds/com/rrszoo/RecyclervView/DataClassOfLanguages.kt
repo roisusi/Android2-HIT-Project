@@ -2,7 +2,7 @@ package devdeeds.com.rrszoo.RecyclervView
 
 import android.widget.Button
 
-data class Todo(
+data class DataClassOfLanguages(
 
     //var title:String,
     //var isChecked:Boolean,

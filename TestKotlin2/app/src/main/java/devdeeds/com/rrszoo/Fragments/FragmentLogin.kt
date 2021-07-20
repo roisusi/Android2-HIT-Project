@@ -161,9 +161,6 @@ class FragmentLogin : Fragment {
         messageToServer?.add(passText!!.text.toString())
         getInformation = GetInformation(messageToServer!!, requireActivity())
         getInformation!!.connect()
-        //getInformation?.execute()
-        if (pref == null)
-        getInformation!!.connect()
     }
 
     companion object {
