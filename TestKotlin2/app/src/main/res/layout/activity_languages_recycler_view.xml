@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="devdeeds.com.rrszoo.RecyclervView.LanguagesRecyclerView">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="devdeeds.com.rrszoo.RecyclervView.LanguagesRecyclerView">
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="106dp"
+        android:layout_width="398dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:text="Please add your language \nThe blue sign is marked as your chosen language"
+        android:text="Please add your languge  \nYou will see a button able to switch for the language you chose"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
