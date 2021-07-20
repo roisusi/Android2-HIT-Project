@@ -5,12 +5,14 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rrszoo.R
 import com.facebook.CallbackManager
@@ -25,7 +27,7 @@ import com.facebook.share.model.SharePhotoContent
 import com.facebook.share.widget.ShareDialog
 import com.squareup.picasso.Picasso
 import java.lang.Exception
-import java.util.*
+import kotlin.collections.ArrayList
 
 class AnimalPage : AppCompatActivity() {
     var btnShareLink: Button? = null
@@ -41,7 +43,7 @@ class AnimalPage : AppCompatActivity() {
     private var numOfChildres: TextView? = null
     private var gettingExtraAnimal: String? = null
     private var gettingExtraAdmin: String? = null
-    private var messageToServer: MutableList<String?>? = null
+    private var messageToServer: ArrayList<String?>? = null
     private val AnimalMessage: List<String>? = null
     private var mt: GetInformation? = null
 
@@ -106,7 +108,7 @@ class AnimalPage : AppCompatActivity() {
     }
 
     private val fromDB: Unit
-        private get() {
+        @RequiresApi(Build.VERSION_CODES.GINGERBREAD) private get() {
             if (zooLanguage!!.isEnglish) {
                 messageToServer!!.add("En")
             } else {
@@ -115,11 +117,12 @@ class AnimalPage : AppCompatActivity() {
             messageToServer!!.add("Animal")
             messageToServer!!.add(gettingExtraAnimal)
             mt = GetInformation(messageToServer!!, this)
-            mt?.execute()
+            //mt?.execute()
+            mt!!.connect()
         }
 
     @SuppressLint("WrongThread")
-    fun SetAnimalFromDataBase(animalMessage: List<String>) {
+    fun SetAnimalFromDataBase(animalMessage: ArrayList<String?>) {
 
 
         ///Animal animal = new Animal(animalMessage);
@@ -135,7 +138,7 @@ class AnimalPage : AppCompatActivity() {
         food!!.append(animalMessage[4])
         numOfChildres = findViewById<View>(R.id.numOfChilds) as TextView
         numOfChildres!!.append(animalMessage[5])
-        imageUri = animalMessage[6]
+        imageUri = animalMessage[6].toString()
         val ivBasicImage = findViewById<View>(R.id.animalImageView) as ImageView
         Picasso.get().load(imageUri).into(ivBasicImage)
         shareAnimal()

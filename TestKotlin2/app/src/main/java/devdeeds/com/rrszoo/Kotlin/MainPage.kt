@@ -23,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import devdeeds.com.rrszoo.Fragments.FragmentAddAnimal
 import devdeeds.com.rrszoo.Fragments.FragmentAnimals
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainPage : AppCompatActivity(), OnItemSelectedListener {
@@ -38,8 +39,8 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
     private var fragmentAddAnimalal: FragmentAddAnimal? = null
     private var imageView: ImageView? = null
     private var gettingExtra: String? = null
-    private var animal: List<String>? = null
-    private var messageToServer: MutableList<String?>? = null
+    private var animal: ArrayList<String?>? = null
+    private var messageToServer: ArrayList<String?>? = null
     private var getInformation: GetInformation? = null
     private var sendInformation: SendInformation? = null
     private var fab: FloatingActionButton? = null
@@ -86,6 +87,7 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
         moveTaskToBack(false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     fun animalSelection(view: View) {
         fragmentManager = supportFragmentManager
         fragmentAnimalPage = FragmentAnimals(zooLanguage?.isEnglish == true)
@@ -123,6 +125,7 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
         supportActionBar!!.show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     private fun getDataBaseTypes(animal: String) {
         if (zooLanguage?.isEnglish == true) {
             messageToServer!!.add("En")
@@ -132,15 +135,16 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
         messageToServer!!.add("Type")
         messageToServer!!.add(animal)
         getInformation = GetInformation(messageToServer!!, this)
-        getInformation!!.execute()
+        //getInformation!!.execute()
+        getInformation!!.connect()
     }
 
-    fun fillArrayToSpinner(list: List<String>?) {
+    fun fillArrayToSpinner(list: ArrayList<String?>?) {
         animal = list
         openSpinner(animal)
     }
 
-    private fun openSpinner(types: List<String>?) {
+    private fun openSpinner(types: ArrayList<String?>?) {
         spinnerAnimals = findViewById(R.id.spinner)
         val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, types!!.toMutableList())
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)

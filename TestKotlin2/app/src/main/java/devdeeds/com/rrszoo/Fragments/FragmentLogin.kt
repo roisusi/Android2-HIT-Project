@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
 import devdeeds.com.rrszoo.Kotlin.GetInformation
-import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +31,7 @@ class FragmentLogin : Fragment {
     private var loginText: EditText? = null
     private var passText: EditText? = null
     private var stringFromServer: List<String>? = null
-    private var messageToServer: MutableList<String>? = null
+    private var messageToServer: ArrayList<String?>? = null
     private var getInformation: GetInformation? = null
     private var logout = false
     private var checkBoxLogin: CheckBox? = null
@@ -147,6 +147,7 @@ class FragmentLogin : Fragment {
         return logout
     }
 
+    @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     fun loginToServer() {
         messageToServer = ArrayList()
         messageToServer?.clear()
@@ -159,7 +160,10 @@ class FragmentLogin : Fragment {
         messageToServer?.add(loginText!!.text.toString())
         messageToServer?.add(passText!!.text.toString())
         getInformation = GetInformation(messageToServer!!, requireActivity())
-        getInformation?.execute()
+        getInformation!!.connect()
+        //getInformation?.execute()
+        if (pref == null)
+        getInformation!!.connect()
     }
 
     companion object {

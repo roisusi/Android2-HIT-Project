@@ -2,21 +2,24 @@ package devdeeds.com.rrszoo.Kotlin
 
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rrszoo.R
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AccountInfo : AppCompatActivity() {
     private var getInformation: GetInformation? = null
     private val sendInformation: SendInformation? = null
-    private var messageToServer: MutableList<String>? = null
-    private var stringFromServer: List<String>? = null
+    private var messageToServer: ArrayList<String?>? = null
+    private var stringFromServer: ArrayList<String?>? = null
     var zooLanguage: ZooLanguage? = null
     private var menu: Menu? = null
     private var inflater: MenuInflater? = null
@@ -34,7 +37,7 @@ class AccountInfo : AppCompatActivity() {
     }
 
     private val accountInfo: Unit
-        private get() {
+        @RequiresApi(Build.VERSION_CODES.GINGERBREAD) private get() {
             messageToServer = ArrayList()
             if (zooLanguage?.isEnglish == true) {
                 messageToServer?.add("En")
@@ -43,10 +46,11 @@ class AccountInfo : AppCompatActivity() {
             }
             messageToServer?.add("Account")
             getInformation = GetInformation(messageToServer!!, this@AccountInfo)
-            getInformation?.execute()
+            //getInformation?.execute()
+            getInformation!!.connect()
         }
 
-    fun setInfo(info: List<String>) {
+    fun setInfo(info: ArrayList<String?>) {
         stringFromServer = ArrayList()
         stringFromServer = info
         val name = findViewById<View>(R.id.nameAccDB) as TextView

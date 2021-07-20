@@ -16,6 +16,7 @@ import com.example.rrszoo.R
 import devdeeds.com.rrszoo.Fragments.FragmentLogin
 import devdeeds.com.rrszoo.Fragments.FragmentRegister
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private var fragmentManager: FragmentManager? = null
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     private var login: Button? = null
     private var register: Button? = null
     private var title: ImageView? = null
-    private var messageToServer: MutableList<String>? = null
-    private var stringFromServer: List<String>? = null
+    private var messageToServer: ArrayList<String?>? = null
+    private var stringFromServer: ArrayList<String?>? = null
     private val getInformation: GetInformation? = null
     private var sendInformation: SendInformation? = null
     private var fragmentLogin: FragmentLogin? = null
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-    fun postLogin(s: List<String>?) {
+    fun postLogin(s: ArrayList<String?>?) {
         stringFromServer = s
         Log.e(TAG, "test: $stringFromServer")
         if (fragmentLogin!!.rememberLogin(logout)) {
