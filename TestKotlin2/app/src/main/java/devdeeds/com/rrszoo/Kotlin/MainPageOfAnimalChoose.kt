@@ -53,6 +53,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     private var inflater: MenuInflater? = null
     private var sharedPreference: SharedPreferences? = null
     private var editor: Editor? = null
+    private var toogle: Switch? = null
     var zooLanguage: ZooLanguage? = null
     var switchStringLanguage:String?="En"
     private var actionbar:ActionBar?=null
@@ -73,6 +74,14 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         artth = findViewById<View>(R.id.arthropoda) as Button
         animal = ArrayList()
         messageToServer = ArrayList()
+        toogle = findViewById<Switch>(R.id.swithLanguages)
+        toogle?.setOnClickListener {
+            if (toogle!!.isChecked) {
+                ZooTranslator.translate("mammals", zooLanguage!!.getLang(), mammals!!)
+            }
+        }
+
+
 
 
         if (intent.getStringExtra("Language") != null)

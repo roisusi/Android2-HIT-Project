@@ -12,10 +12,9 @@ class ZooLanguage internal constructor(  // false equals hebrew
     private val sharedPreferences: SharedPreferences
 ) {
     private val editore: Editor
-    private val RTLLanguages: Array<String> = arrayOf<String>(TranslateLanguage.HEBREW, TranslateLanguage.ARABIC);
 
     val isLTRLanguage: Boolean
-        public get() = !(RTLLanguages.contains(getLang()))
+        public get() = true
 
     @SuppressLint("NewApi")
     fun setLanguage(lang: String) {
