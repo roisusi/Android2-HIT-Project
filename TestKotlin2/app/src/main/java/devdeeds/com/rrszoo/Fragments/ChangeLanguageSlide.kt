@@ -1,5 +1,6 @@
 package devdeeds.com.rrszoo.Fragments
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,8 @@ import devdeeds.com.rrszoo.Kotlin.TranslateObject
 import devdeeds.com.rrszoo.Kotlin.ZooLanguage
 import devdeeds.com.rrszoo.Kotlin.ZooTranslator
 import androidx.appcompat.app.ActionBar
+import devdeeds.com.rrszoo.Kotlin.MainPageOfAnimalChoose
+import devdeeds.com.rrszoo.RecyclervView.LanguagesRecyclerView
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -88,10 +91,15 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
             }
             else {
                 switch.setText("EN")
-                translateObjects?.forEach { translateObjects: TranslateObject -> ZooTranslator.translate(translateObjects.text, TranslateLanguage.ENGLISH, translateObjects.view) }
-                if (this.actionBar != null) {
-                    this.actionBar!!.title = ZooTranslator.translate(this.actionBar!!.title.toString(), TranslateLanguage.ENGLISH, this.actionBar)
-                }
+//                translateObjects?.forEach { translateObjects: TranslateObject -> ZooTranslator.translate(translateObjects.text, TranslateLanguage.ENGLISH, translateObjects.view) }
+//                if (this.actionBar != null) {
+//                    this.actionBar!!.title = ZooTranslator.translate(this.actionBar!!.title.toString(), TranslateLanguage.ENGLISH, this.actionBar)
+                var intent = Intent(context, MainPageOfAnimalChoose::class.java)
+                intent.putExtra("Language", "EN")
+                startActivity(intent)
+
+//                }
+
             }
 
         }

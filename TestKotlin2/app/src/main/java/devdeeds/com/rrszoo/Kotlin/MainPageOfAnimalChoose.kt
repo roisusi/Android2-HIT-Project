@@ -118,7 +118,8 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             abc
         )).commit()
 
-        actionbar = supportActionBar
+        //todd: implement this and tanslate nav
+        menuInflater
 
 
 
@@ -192,6 +193,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     }
 
     fun fillArrayToSpinner(list: ArrayList<String?>?) {
+        //TODO 
         animal = list
         openSpinner(animal)
     }
@@ -287,6 +289,8 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         inflater = menuInflater
         this.menu = menu
         inflater!!.inflate(R.menu.menu, menu)
+
+
         return true
     }
 
@@ -308,16 +312,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
                 intent = Intent(applicationContext, Settings::class.java)
                 intent.putExtra("Language", switchStringLanguage)
                 startActivity(intent)
-            }
-            R.id.Hebrew -> {
-                zooLanguage?.setLanguage(TranslateLanguage.HEBREW)
-                //setContentView(R.layout.main_page_heb);
-                item.isChecked = true
-            }
-            R.id.English -> {
-                zooLanguage?.setLanguage(TranslateLanguage.ENGLISH)
-                //setContentView(R.layout.main_page);
-                item.isChecked = true
             }
             else -> return super.onOptionsItemSelected(item) //react to many chooses
         }
