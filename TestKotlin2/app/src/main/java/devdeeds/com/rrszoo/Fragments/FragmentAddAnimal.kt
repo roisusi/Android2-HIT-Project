@@ -41,7 +41,7 @@ class FragmentAddAnimal : Fragment {
         }
 
         //Hide the Menu Bar
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        //(activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
     override fun onCreateView(

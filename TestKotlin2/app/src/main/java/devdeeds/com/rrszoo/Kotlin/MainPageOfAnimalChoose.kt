@@ -200,11 +200,9 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         fragmentAddAnimalal = FragmentAddAnimal(zooLanguage?.isEnglish == true)
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         if (zooLanguage?.isEnglish == true) {
-            fragmentTransaction.add(R.id.addAnimalFrag, fragmentAddAnimalal!!).addToBackStack(null)
-                .commit()
+            fragmentTransaction.add(R.id.addAnimalFrag, fragmentAddAnimalal!!).addToBackStack(null).commit()
         } else {
-            fragmentTransaction.replace(R.id.addAnimalFragHeb, fragmentAddAnimalal!!)
-                .addToBackStack(null).commit()
+            fragmentTransaction.replace(R.id.addAnimalFragHeb, fragmentAddAnimalal!!).addToBackStack(null).commit()
         }
         fab!!.visibility = View.INVISIBLE
         imageView!!.visibility = View.INVISIBLE
@@ -213,6 +211,9 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         reptalis!!.visibility = View.INVISIBLE
         birds!!.visibility = View.INVISIBLE
         artth!!.visibility = View.INVISIBLE
+
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
