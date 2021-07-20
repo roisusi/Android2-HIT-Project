@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
+import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Fragments.FragmentLogin
 import devdeeds.com.rrszoo.Fragments.FragmentRegister
 import java.util.*
@@ -44,6 +45,12 @@ class FirstLoginPage : AppCompatActivity() {
         //Hide the Menu Bar
         supportActionBar!!.hide()
         logout = getIntent().getStringExtra("Logout")
+
+
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        //fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide()).commit()
     }
 
     fun registerUser(view: View?) {

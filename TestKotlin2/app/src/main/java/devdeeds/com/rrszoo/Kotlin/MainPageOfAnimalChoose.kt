@@ -18,21 +18,24 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Fragments.FragmentAddAnimal
 import devdeeds.com.rrszoo.Fragments.FragmentAnimals
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainPageOfAnimalChoose : AppCompatActivity(), OnItemSelectedListener {
+class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     private var seaAnimal: Button? = null
     private var mammals: Button? = null
     private var reptalis: Button? = null
     private var birds: Button? = null
     private var artth: Button? = null
     private var fragmentManager: FragmentManager? = null
+    private var fragmentTransaction: FragmentTransaction? = null
     private var spinnerAnimals: Spinner? = null
     private var spinnerTypes: Spinner? = null
     private var fragmentAnimalPage: Fragment? = null
@@ -49,6 +52,10 @@ class MainPageOfAnimalChoose : AppCompatActivity(), OnItemSelectedListener {
     private var sharedPreference: SharedPreferences? = null
     private var editor: Editor? = null
     var zooLanguage: ZooLanguage? = null
+    var switchStringLanguage:String?="En"
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +73,10 @@ class MainPageOfAnimalChoose : AppCompatActivity(), OnItemSelectedListener {
         animal = ArrayList()
         messageToServer = ArrayList()
 
+
+        if (intent.getStringExtra("Language") != null)
+            switchStringLanguage = intent.getStringExtra("Language")
+
         //For Admin Add new Animal to DataBase
         gettingExtra = intent.getStringExtra("Admin")
         Log.e(
@@ -73,14 +84,20 @@ class MainPageOfAnimalChoose : AppCompatActivity(), OnItemSelectedListener {
             "onCreate: Login Admin $gettingExtra"
         )
         if (gettingExtra == "true") {
-            fab?.setOnClickListener(View.OnClickListener { /*                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();*/
+            fab?.setOnClickListener(View.OnClickListener {
                 fabFunc()
             })
 
         } else {
             fab?.setVisibility(View.INVISIBLE)
         }
+
+
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        Log.e(TAG, "Main Page $switchStringLanguage", )
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
     }
 
     override fun onBackPressed() {
