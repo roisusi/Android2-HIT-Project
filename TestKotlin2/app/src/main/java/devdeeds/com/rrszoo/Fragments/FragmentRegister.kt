@@ -13,7 +13,7 @@ import com.example.rrszoo.R
  * create an instance of this fragment.
  */
 class FragmentRegister : Fragment {
-    var isEnglish: Boolean? = null
+    var isLTRLanguage: Boolean? = null
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -23,8 +23,8 @@ class FragmentRegister : Fragment {
         // Required empty public constructor
     }
 
-    constructor(isEnglish: Boolean) {
-        this.isEnglish = isEnglish
+    constructor(isLTRLanguage: Boolean) {
+        this.isLTRLanguage = isLTRLanguage
         // Required empty public constructor
     }
 
@@ -42,7 +42,7 @@ class FragmentRegister : Fragment {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(
-            if (isEnglish!!) R.layout.fragment_register else R.layout.fragment_register_heb,
+            if (isLTRLanguage!!) R.layout.fragment_register else R.layout.fragment_register_heb,
             container,
             false
         )

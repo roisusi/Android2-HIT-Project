@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
+import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import java.util.*
 import kotlin.collections.ArrayList
@@ -34,7 +35,7 @@ class AccountInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
-        setContentView(if (zooLanguage?.isEnglish == true) R.layout.activity_account_info else R.layout.activity_account_info_heb)
+        setContentView(if (zooLanguage?.isLTRLanguage == true) R.layout.activity_account_info else R.layout.activity_account_info_heb)
         accountInfo
         //actionbar
         val actionbar = supportActionBar
@@ -62,7 +63,7 @@ class AccountInfo : AppCompatActivity() {
     private val accountInfo: Unit
         @RequiresApi(Build.VERSION_CODES.GINGERBREAD) private get() {
             messageToServer = ArrayList()
-            if (zooLanguage?.isEnglish == true) {
+            if (zooLanguage?.isLTRLanguage == true) {
                 messageToServer?.add("En")
             } else {
                 messageToServer?.add("He")
@@ -94,13 +95,13 @@ class AccountInfo : AppCompatActivity() {
         val id = item.itemId
         when (id) {
             R.id.Hebrew -> {
-                zooLanguage?.setHebrew()
+                zooLanguage?.setLanguage(TranslateLanguage.HEBREW)
                 setContentView(R.layout.activity_account_info_heb)
                 setInfo(stringFromServer!!)
                 item.isChecked = true
             }
             R.id.English -> {
-                zooLanguage?.setEnglish()
+                zooLanguage?.setLanguage(TranslateLanguage.ENGLISH)
                 setContentView(R.layout.activity_account_info)
                 setInfo(stringFromServer!!)
                 item.isChecked = true

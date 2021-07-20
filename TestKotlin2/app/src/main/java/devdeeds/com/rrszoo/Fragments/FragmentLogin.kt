@@ -37,15 +37,15 @@ class FragmentLogin : Fragment {
     private var logout = false
     private var checkBoxLogin: CheckBox? = null
     private var log: String? = null
-    var isEnglish: Boolean? = null
+    var isLTRLanguage: Boolean? = null
 
     constructor() {
         // Required empty public constructor
     }
 
-    constructor(isEnglsih: Boolean?) {
+    constructor(isLTRLanguage: Boolean?) {
         // Required empty public constructor
-        isEnglish = isEnglsih
+        this.isLTRLanguage = isLTRLanguage
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class FragmentLogin : Fragment {
     ): View? {
         // Inflate the layout for this fragment
         val v: View = inflater.inflate(
-            if (isEnglish!!) R.layout.fragment_login else R.layout.fragment_login_heb,
+            if (isLTRLanguage!!) R.layout.fragment_login else R.layout.fragment_login_heb,
             container,
             false
         )
@@ -152,7 +152,7 @@ class FragmentLogin : Fragment {
     fun loginToServer() {
         messageToServer = ArrayList()
         messageToServer?.clear()
-        if (isEnglish!!) {
+        if (isLTRLanguage!!) {
             messageToServer?.add("En")
         } else {
             messageToServer?.add("He")

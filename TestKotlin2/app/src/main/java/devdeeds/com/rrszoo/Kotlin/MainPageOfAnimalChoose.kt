@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Fragments.FragmentAddAnimal
 import devdeeds.com.rrszoo.Fragments.FragmentAnimals
@@ -62,7 +63,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         super.onCreate(savedInstanceState)
         editor = getSharedPreferences("RRsZoo", MODE_PRIVATE).edit()
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
-        setContentView(if (zooLanguage!!.isEnglish) R.layout.main_page else R.layout.main_page_heb)
+        setContentView(if (zooLanguage!!.isLTRLanguage) R.layout.main_page else R.layout.main_page_heb)
         fab = findViewById(R.id.fab)
         imageView = findViewById<View>(R.id.titleBar3) as ImageView
         seaAnimal = findViewById<View>(R.id.seaAnimals) as Button
@@ -119,11 +120,11 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     fun animalSelection(view: View) {
         fragmentManager = supportFragmentManager
-        fragmentAnimalPage = FragmentAnimals(zooLanguage?.isEnglish == true)
+        fragmentAnimalPage = FragmentAnimals(zooLanguage?.isLTRLanguage == true, zooLanguage!!.getLang())
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         fragmentTransaction.add(R.id.animalFrag, fragmentAnimalPage as FragmentAnimals).addToBackStack(null).commit()
         fragmentManager!!.executePendingTransactions()
-        if (zooLanguage?.isEnglish == true) {
+        if (zooLanguage?.isLTRLanguage == true) {
             when (view.id) {
                 R.id.seaAnimals -> getDataBaseTypes("Sea Animals")
                 R.id.arthropoda -> getDataBaseTypes("Arthropoda")
@@ -162,7 +163,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
 
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     private fun getDataBaseTypes(animal: String) {
-        if (zooLanguage?.isEnglish == true) {
+        if (zooLanguage?.isLTRLanguage == true) {
             messageToServer!!.add("En")
         } else {
             messageToServer!!.add("He")
@@ -194,9 +195,9 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
 
     fun fabFunc() {
         fragmentManager = supportFragmentManager
-        fragmentAddAnimalal = FragmentAddAnimal(zooLanguage?.isEnglish == true)
+        fragmentAddAnimalal = FragmentAddAnimal(zooLanguage?.isLTRLanguage == true)
         val fragmentTransaction = fragmentManager!!.beginTransaction()
-        if (zooLanguage?.isEnglish == true) {
+        if (zooLanguage?.isLTRLanguage == true) {
             fragmentTransaction.add(R.id.addAnimalFrag, fragmentAddAnimalal!!).addToBackStack(null).commit()
         } else {
             fragmentTransaction.replace(R.id.addAnimalFragHeb, fragmentAddAnimalal!!).addToBackStack(null).commit()
@@ -229,7 +230,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             openLoginAlert()
         } else {
             spinnerTypes = fragmentAddAnimalal?.spinner
-            if (zooLanguage?.isEnglish == true) {
+            if (zooLanguage?.isLTRLanguage == true) {
                 messageToServer!!.add("En")
             } else {
                 messageToServer!!.add("He")
@@ -292,12 +293,12 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
                 startActivity(intent)
             }
             R.id.Hebrew -> {
-                zooLanguage?.setHebrew()
+                zooLanguage?.setLanguage(TranslateLanguage.HEBREW)
                 //setContentView(R.layout.main_page_heb);
                 item.isChecked = true
             }
             R.id.English -> {
-                zooLanguage?.setEnglish()
+                zooLanguage?.setLanguage(TranslateLanguage.ENGLISH)
                 //setContentView(R.layout.main_page);
                 item.isChecked = true
             }
