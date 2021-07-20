@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -31,6 +32,11 @@ class FirstLoginPage : AppCompatActivity() {
     private var fragmentLogin: FragmentLogin? = null
     private var logout: String? = null
     private var zooLanguage: ZooLanguage? = null
+    private var actionbar: ActionBar?=null
+
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,7 @@ class FirstLoginPage : AppCompatActivity() {
         fragmentLogin = FragmentLogin(zooLanguage?.isEnglish)
 
         //Hide the Menu Bar
-        supportActionBar!!.hide()
+        //supportActionBar!!.hide()
         logout = getIntent().getStringExtra("Logout")
 
 
@@ -51,16 +57,31 @@ class FirstLoginPage : AppCompatActivity() {
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
         //fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide()).commit()
+
+
+        //actionbar
+        actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Login Page"
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        //onBackPressed()
+        backToMain()
+        return true
     }
 
     fun registerUser(view: View?) {
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.fragmentReg, FragmentRegister(zooLanguage?.isEnglish == true))
-            .addToBackStack(null).commit()
+        fragmentTransaction!!.add(R.id.fragmentReg, FragmentRegister(zooLanguage?.isEnglish == true)).addToBackStack(null).commit()
         login!!.visibility = View.INVISIBLE
         register!!.visibility = View.INVISIBLE
         title!!.visibility = View.INVISIBLE
+        //set back button
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     fun loginFrag(view: View?) {
@@ -70,11 +91,14 @@ class FirstLoginPage : AppCompatActivity() {
         login!!.visibility = View.INVISIBLE
         register!!.visibility = View.INVISIBLE
         title!!.visibility = View.INVISIBLE
+
+        //set back button
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     ///backToMain
-    fun backToMain(view: View?) {
-        Log.d(TAG, "onBackPressed: ")
+    fun backToMain() {
         if (fragmentManager!!.backStackEntryCount == 0) {
             finish()
         } else {
@@ -83,6 +107,9 @@ class FirstLoginPage : AppCompatActivity() {
             register!!.visibility = View.VISIBLE
             title!!.visibility = View.VISIBLE
         }
+
+        actionbar!!.setDisplayHomeAsUpEnabled(false)
+        actionbar!!.setDisplayHomeAsUpEnabled(false)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)

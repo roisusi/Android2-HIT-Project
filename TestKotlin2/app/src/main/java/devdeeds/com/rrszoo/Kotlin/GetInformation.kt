@@ -62,7 +62,7 @@ class GetInformation(message: ArrayList<String?>, activity: Activity) {
 
     fun openActivity() {
         Log.e(TAG, "onPostExecute: pre " + okMessage)
-        if (activity is FirstLoginPage && backFromServer.isEmpty()) {
+        if (activity is FirstLoginPage && backFromServer.isEmpty() ||backFromServer[0]=="NOT OK LOGGING" ) {
             openLoginAlert()
         } else if (activity is FirstLoginPage) {
             val activity = activity as FirstLoginPage?

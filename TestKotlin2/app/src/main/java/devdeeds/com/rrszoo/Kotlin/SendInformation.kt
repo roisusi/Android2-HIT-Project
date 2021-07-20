@@ -74,9 +74,10 @@ class SendInformation(message: ArrayList<String?>, activity: Activity) {
         } else if (activity is FirstLoginPage && backFromServer[0] == "OK") {
             val activity = activity as FirstLoginPage
             Toast.makeText(activity, "Registration Success", Toast.LENGTH_LONG).show()
-            activity.backToMain(view)
+            activity.backToMain()
         } else if (activity is FirstLoginPage && backFromServer[0] == "NOT OK") {
             Toast.makeText(activity, "User Already Exist", Toast.LENGTH_LONG).show()
+
         }
 
         if (activity is MainPageOfAnimalChoose && backFromServer.isEmpty()) {

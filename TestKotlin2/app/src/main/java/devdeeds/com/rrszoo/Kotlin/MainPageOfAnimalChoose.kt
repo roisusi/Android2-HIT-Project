@@ -58,9 +58,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
 
 
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         editor = getSharedPreferences("RRsZoo", MODE_PRIVATE).edit()

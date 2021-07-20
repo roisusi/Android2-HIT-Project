@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
@@ -159,8 +160,13 @@ class FragmentLogin : Fragment {
         messageToServer?.add("Login")
         messageToServer?.add(loginText!!.text.toString())
         messageToServer?.add(passText!!.text.toString())
-        getInformation = GetInformation(messageToServer!!, requireActivity())
-        getInformation!!.connect()
+
+        if (loginText!!.text.toString() != "" && passText!!.text.toString() !="") {
+            getInformation = GetInformation(messageToServer!!, requireActivity())
+            getInformation!!.connect()
+        }
+        else
+            Toast.makeText(context, "Please Enter Login And Password", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
