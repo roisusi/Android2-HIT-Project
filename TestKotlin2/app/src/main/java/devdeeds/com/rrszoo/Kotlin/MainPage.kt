@@ -218,7 +218,8 @@ class MainPage : AppCompatActivity(), OnItemSelectedListener {
             messageToServer!!.add(childrens.text.toString())
             messageToServer!!.add(img.text.toString())
             sendInformation = SendInformation(messageToServer!!, this@MainPage)
-            sendInformation?.execute()
+            //sendInformation?.execute()
+            sendInformation!!.connect()
         }
     }
 

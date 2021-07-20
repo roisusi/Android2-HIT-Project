@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         fragmentLogin!!.loginToServer()
     }
 
+    @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     fun register(view: View?) {
         messageToServer!!.clear()
         val login = findViewById<View>(R.id.loginReg) as EditText
@@ -103,7 +104,8 @@ class MainActivity : AppCompatActivity() {
         messageToServer!!.add("false")
         messageToServer!!.add(email.text.toString())
         sendInformation = SendInformation(messageToServer!!, this@MainActivity, view)
-        sendInformation?.execute()
+        //sendInformation?.execute()
+        sendInformation!!.connect()
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
