@@ -84,7 +84,7 @@ class SendInformation(message: ArrayList<String?>, activity: Activity) {
         } else if (activity is MainPageOfAnimalChoose && backFromServer[0] == "OK") {
             val activity = activity as MainPageOfAnimalChoose
             Toast.makeText(activity, "Add Success", Toast.LENGTH_LONG).show()
-            activity.backToAnimalMenu(view)
+            activity.backToAnimalMenu()
         } else if (activity is MainPageOfAnimalChoose && backFromServer[0] == "NOT OK") {
             Toast.makeText(activity, "Animal Already Exist", Toast.LENGTH_LONG).show()
         }

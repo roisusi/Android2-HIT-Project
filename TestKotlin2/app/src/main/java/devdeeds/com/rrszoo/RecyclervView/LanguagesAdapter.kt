@@ -98,8 +98,6 @@ class LanguagesAdapter(
     @SuppressLint("WrongViewCast")
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
 
-
-
         //take the data and show it
         holder.itemView.apply {
             lanButton.text = dataClassOfLanguages[position].nameOfButtonLanguage
@@ -109,19 +107,15 @@ class LanguagesAdapter(
             //                                                  //
 
             lanButton.setOnClickListener {
-                Toast.makeText(this.context,"You click on ${lanButton.text} and ${ListOfStates?.get(0)}",Toast.LENGTH_SHORT).show()
-                var setLanguageToSwitch:String = ListOfStates?.get(position).toString()//lanButton.text as String
 
+                var setLanguageToSwitch:String = ListOfStates?.get(position).toString()//lanButton.text as String
                 Log.e("TAG", "Lan: $setLanguageToSwitch", )
                 var intent = Intent(context, MainPageOfAnimalChoose::class.java)
                 intent.putExtra("Admin","true")
                 intent.putExtra("Language",setLanguageToSwitch)
                 context.startActivity(intent)
-
             }
-
         }
-
     }
 
     override fun getItemCount(): Int {

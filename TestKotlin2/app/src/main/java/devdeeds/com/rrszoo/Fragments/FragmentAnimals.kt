@@ -40,6 +40,8 @@ class FragmentAnimals : Fragment {
             mParam1 = requireArguments().getString(ARG_PARAM1)
             mParam2 = requireArguments().getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(

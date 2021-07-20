@@ -90,6 +90,16 @@ class AnimalPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
         setContentView(if (zooLanguage?.isEnglish == true) R.layout.animalpage else R.layout.animalpage_heb)
+
+        //actionbar
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Animal Select Page"
+        //set back button
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+
+
         messageToServer = ArrayList()
         gettingExtraAnimal = intent.getStringExtra("Animal")
         Log.e(
@@ -97,11 +107,11 @@ class AnimalPage : AppCompatActivity() {
             "onCreate: Animal $gettingExtraAnimal"
         )
         gettingExtraAdmin = intent.getStringExtra("Admin")
-        Log.e(
-            TAG,
-            "onCreate: Admin $gettingExtraAdmin"
-        )
+        Log.e(TAG, "onCreate: Admin $gettingExtraAdmin")
+
+
         val backToAnimalSelection = findViewById<View>(R.id.backAnimal) as Button
+        backToAnimalSelection.visibility = View.INVISIBLE
         backToAnimalSelection.setOnClickListener {
             val intent = Intent(applicationContext, MainPageOfAnimalChoose::class.java)
             intent.putExtra("Admin", gettingExtraAdmin)
@@ -117,10 +127,15 @@ class AnimalPage : AppCompatActivity() {
         fragmentTransaction = fragmentManager!!.beginTransaction()
         fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
+
+
         fromDB
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private val fromDB: Unit
@@ -189,4 +204,6 @@ class AnimalPage : AppCompatActivity() {
     companion object {
         private const val TAG = "AnimalPage"
     }
+
+
 }

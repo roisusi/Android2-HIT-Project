@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -53,6 +54,8 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     private var editor: Editor? = null
     var zooLanguage: ZooLanguage? = null
     var switchStringLanguage:String?="En"
+    private var actionbar:ActionBar?=null
+
 
 
 
@@ -98,6 +101,18 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         fragmentTransaction = fragmentManager!!.beginTransaction()
         Log.e(TAG, "Main Page $switchStringLanguage", )
         fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!)).commit()
+
+        //actionbar
+        actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Main Page"
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        backToAnimalMenu()
+        return true
     }
 
     override fun onBackPressed() {
@@ -128,9 +143,12 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
                 R.id.birds -> getDataBaseTypes("עופות")
             }
         }
-    }
 
-    fun backToAnimalMenu(view: View?) {
+        //set back button
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+    }
+    fun backToAnimalMenu() {
         fragmentManager!!.popBackStack()
         imageView!!.visibility = View.VISIBLE
         seaAnimal!!.visibility = View.VISIBLE
@@ -140,7 +158,10 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         artth!!.visibility = View.VISIBLE
         showFab()
         supportActionBar!!.show()
+        actionbar!!.setDisplayHomeAsUpEnabled(false)
+        actionbar!!.setDisplayHomeAsUpEnabled(false)
     }
+
 
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     private fun getDataBaseTypes(animal: String) {
@@ -172,16 +193,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         birds!!.visibility = View.INVISIBLE
         artth!!.visibility = View.INVISIBLE
         fab!!.visibility = View.INVISIBLE
-        val back = findViewById<View>(R.id.backToMainPage) as Button
-        back.setOnClickListener {
-            fragmentManager!!.popBackStack()
-            seaAnimal!!.visibility = View.VISIBLE
-            mammals!!.visibility = View.VISIBLE
-            reptalis!!.visibility = View.VISIBLE
-            birds!!.visibility = View.VISIBLE
-            artth!!.visibility = View.VISIBLE
-            showFab()
-        }
     }
 
     fun fabFunc() {
