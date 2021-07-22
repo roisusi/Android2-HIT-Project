@@ -22,10 +22,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.rrszoo.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Fragments.FragmentAddAnimal
 import devdeeds.com.rrszoo.Fragments.FragmentAnimals
+import kotlinx.android.synthetic.main.fragment_change_language_slide.view.*
 import kotlinx.android.synthetic.main.main_page.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -58,7 +58,11 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     var zooLanguage: ZooLanguage? = null
     var switchStringLanguage:String?="En"
     private var actionbar:ActionBar?=null
-
+    private var changeLanguageSlide: ChangeLanguageSlide? = null
+    private var adapter: ArrayAdapter<String>? = null
+    private var originalTypes: ArrayList<String?>? = null
+    private var selectAnimalButton: Button? = null
+    private var translateObjectArr = arrayListOf<TranslateObject>()
 
 
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
@@ -102,27 +106,30 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         //set actionbar title
         actionbar!!.title = "Main Page"
         val abc = actionbar
+        this.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, arrayListOf<String>())
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
         Log.e(TAG, "Main Page $switchStringLanguage", )
+        this.initTranslateObjectArr()
         fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,
             zooLanguage!!,
-            arrayListOf<TranslateObject>(
-                TranslateObject(mammals!!, mammals?.text.toString()),
-                TranslateObject(seaAnimal!!, seaAnimal?.text.toString()),
-                TranslateObject(reptalis!!, reptalis?.text.toString()),
-                TranslateObject(birds!!, birds?.text.toString()),
-                TranslateObject(arthropoda!!, arthropoda?.text.toString())
-                ),
-            abc
+            translateObjectArr,
+            abc,
+            adapter!!
         )).commit()
 
         //todd: implement this and tanslate nav
         menuInflater
+    }
 
-
-
+    fun initTranslateObjectArr() {
+        translateObjectArr.clear()
+        translateObjectArr.add(TranslateObject(mammals!!, mammals?.text.toString()))
+        translateObjectArr.add(TranslateObject(reptalis!!, reptalis?.text.toString()))
+        translateObjectArr.add(TranslateObject(birds!!, birds?.text.toString()))
+        translateObjectArr.add(TranslateObject(arthropoda!!, arthropoda?.text.toString()))
+        translateObjectArr.add(TranslateObject(seaAnimal!!, seaAnimal?.text.toString()))
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -192,16 +199,19 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         getInformation!!.connect()
     }
 
+    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     fun fillArrayToSpinner(list: ArrayList<String?>?) {
-        //TODO 
+        //TODO
         animal = list
         openSpinner(animal)
     }
 
+    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     private fun openSpinner(types: ArrayList<String?>?) {
+        originalTypes = types
         spinnerAnimals = findViewById(R.id.spinner)
-        val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, types!!.toMutableList())
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        adapter?.clear()
+        adapter!!.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         spinnerAnimals?.setAdapter(adapter)
         spinnerAnimals?.setOnItemSelectedListener(this)
         seaAnimal!!.visibility = View.INVISIBLE
@@ -210,6 +220,12 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         birds!!.visibility = View.INVISIBLE
         arthropoda!!.visibility = View.INVISIBLE
         fab!!.visibility = View.INVISIBLE
+        val language: View = findViewById(R.id.languageFragment)
+        if (language.swithLanguages.isChecked) {
+            types!!.forEach { type -> ZooTranslator.translate(type!!, zooLanguage!!.getLang(), adapter!!) }
+        } else {
+            adapter!!.addAll(types!!)
+        }
     }
 
     fun fabFunc() {
@@ -269,9 +285,15 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-        val animal = parent.getItemAtPosition(position).toString()
-        val select = findViewById<View>(R.id.selectAnimal) as Button
-        select.setOnClickListener {
+        val animal = originalTypes!![position]
+        selectAnimalButton = findViewById<View>(R.id.selectAnimal) as Button
+        if (languageFragment.swithLanguages.isChecked) {
+            ZooTranslator.translate(zooLanguage!!.getLang(), selectAnimalButton)
+        } else {
+            this.initTranslateObjectArr()
+            translateObjectArr.add(TranslateObject(selectAnimalButton!!, selectAnimalButton!!.text.toString()))
+        }
+        selectAnimalButton!!.setOnClickListener {
             val intent = Intent(applicationContext, AnimalPage::class.java)
             intent.putExtra("Animal", animal)
             intent.putExtra("Admin", gettingExtra)

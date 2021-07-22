@@ -58,9 +58,6 @@ class FragmentAnimals : Fragment {
             container,
             false
         );
-        var select: Button = view.findViewById<Button>(R.id.selectAnimal)
-        var a = ZooTranslator.translate("Select", language, select)
-        select.setText(a)
         return view;
     }
 

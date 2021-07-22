@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Switch
 import androidx.annotation.RequiresApi
 import com.example.rrszoo.R
@@ -38,7 +39,7 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
     var zooLanguage: ZooLanguage? = null
     var translateObjects: ArrayList<TranslateObject>? = null
     var actionBar: ActionBar? = null
-
+    var adapter: ArrayAdapter<String>? = null
 
     init {
         switchString = switchInitialization
@@ -49,6 +50,14 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
     constructor(switchInitialization:String, zooLanguage: ZooLanguage?, translateObjects: ArrayList<TranslateObject>?, actionBar:ActionBar?):
             this(switchInitialization,zooLanguage,translateObjects){
                 this.actionBar = actionBar
+
+
+    }
+
+    constructor(switchInitialization:String, zooLanguage: ZooLanguage?, translateObjects: ArrayList<TranslateObject>?, actionBar:ActionBar?, adapter: ArrayAdapter<String>):
+            this(switchInitialization,zooLanguage,translateObjects){
+        this.actionBar = actionBar
+        this.adapter = adapter
 
 
     }
@@ -84,10 +93,28 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
         switch.setOnClickListener {
             if(switch.isChecked) {
                 switch.setText(zooLanguage!!.getLang().toUpperCase())
-                translateObjects?.forEach { translateObjects: TranslateObject -> ZooTranslator.translate(translateObjects.text, zooLanguage!!.getLang(), translateObjects.view) }
+                translateObjects?.forEach { translateObjects: TranslateObject ->
+                    run {
+                        if (translateObjects.view != null) {
+                            ZooTranslator.translate(
+                                translateObjects.text,
+                                zooLanguage!!.getLang(),
+                                translateObjects.view
+                            )
+                        }
+                    }
+                }
                 if (this.actionBar != null) {
                     ZooTranslator.translate(this.actionBar!!.title.toString(), zooLanguage!!.getLang(), this.actionBar)
                     switch.isEnabled = false
+                }
+                if (this.adapter != null) {
+                    var tempArr = arrayListOf<String>()
+                    for (i in 0..this.adapter!!.count -1) {
+                        tempArr.add(adapter!!.getItem(i)!!)
+                    }
+                    adapter!!.clear()
+                    tempArr.forEach{ type -> ZooTranslator.translate(type, zooLanguage!!.getLang(), this.adapter!!)}
                 }
             }
         }

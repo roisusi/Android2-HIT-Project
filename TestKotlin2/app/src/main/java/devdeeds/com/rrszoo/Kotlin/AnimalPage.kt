@@ -183,7 +183,7 @@ class AnimalPage : AppCompatActivity() {
             TranslateObject(location!!, location?.text.toString()),
             TranslateObject(lifetime!!, lifetime?.text.toString()),
             TranslateObject(food!!, food?.text.toString()),
-            TranslateObject(facebookText, facebookText.hint.toString()),
+            TranslateObject(facebookText, facebookText.text.toString()),
             TranslateObject(titleAnimalPage, titleAnimalPage?.text.toString()),
             TranslateObject(numOfChildres!!, numOfChildres?.text.toString())
         ), actionbar)).commit()
