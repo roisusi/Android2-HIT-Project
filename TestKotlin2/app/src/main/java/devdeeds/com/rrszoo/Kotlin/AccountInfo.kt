@@ -49,7 +49,22 @@ class AccountInfo : AppCompatActivity() {
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!, zooLanguage, arrayListOf())).commit()
+        val name = findViewById<TextView>(R.id.nameAccDB)
+        val email = findViewById<TextView>(R.id.emailAccDB)
+        val admin = findViewById<TextView>(R.id.adminAccDB)
+        val nameLabel = findViewById<TextView>(R.id.NameAcc)
+        val emailLabel = findViewById<TextView>(R.id.emailAcc)
+        val adminLabel = findViewById<TextView>(R.id.adminAcc)
+        val accoutnInfoLabel = findViewById<TextView>(R.id.titleAcc)
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!, zooLanguage, arrayListOf(
+            TranslateObject(name!!, name?.text.toString()),
+            TranslateObject(admin!!, admin?.text.toString()),
+            TranslateObject(email, email?.text.toString()),
+            TranslateObject(nameLabel!!, nameLabel?.text.toString()),
+            TranslateObject(emailLabel!!, emailLabel?.text.toString()),
+            TranslateObject(adminLabel!!, adminLabel?.text.toString()),
+            TranslateObject(accoutnInfoLabel!!, accoutnInfoLabel?.text.toString())
+        ), actionbar)).commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -89,6 +104,7 @@ class AccountInfo : AppCompatActivity() {
         return true
     }
 
+    // todo: delete
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {

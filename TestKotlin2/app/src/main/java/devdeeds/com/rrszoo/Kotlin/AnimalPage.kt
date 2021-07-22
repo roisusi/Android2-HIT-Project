@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -29,6 +30,7 @@ import com.facebook.share.model.SharePhotoContent
 import com.facebook.share.widget.ShareDialog
 import com.squareup.picasso.Picasso
 import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
+import kotlinx.android.synthetic.main.activity_settings.view.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
 
@@ -51,6 +53,7 @@ class AnimalPage : AppCompatActivity() {
     private var messageToServer: ArrayList<String?>? = null
     private var mt: GetInformation? = null
     var switchStringLanguage:String?="En"
+    private var actionbar: ActionBar? = null
 
 
     var imageContentTarget: com.squareup.picasso.Target = object : com.squareup.picasso.Target {
@@ -92,8 +95,10 @@ class AnimalPage : AppCompatActivity() {
         setContentView(if (zooLanguage?.isLTRLanguage == true) R.layout.animalpage else R.layout.animalpage_heb)
 
         //actionbar
-        val actionbar = supportActionBar
+        this.actionbar = supportActionBar!!
         //set actionbar title
+
+
         actionbar!!.title = "Animal Select Page"
         //set back button
         actionbar!!.setDisplayHomeAsUpEnabled(true)
@@ -124,7 +129,7 @@ class AnimalPage : AppCompatActivity() {
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!, zooLanguage, arrayListOf())).commit()
+
 
 
 
@@ -171,6 +176,17 @@ class AnimalPage : AppCompatActivity() {
         val ivBasicImage = findViewById<View>(R.id.animalImageView) as ImageView
         Picasso.get().load(imageUri).into(ivBasicImage)
         shareAnimal()
+        val facebookText = findViewById<View>(R.id.facebookText) as TextView
+        val titleAnimalPage: TextView = findViewById<TextView>(R.id.titleAnimalPage)
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!, zooLanguage, arrayListOf(
+            TranslateObject(name!!, name?.text.toString()),
+            TranslateObject(location!!, location?.text.toString()),
+            TranslateObject(lifetime!!, lifetime?.text.toString()),
+            TranslateObject(food!!, food?.text.toString()),
+            TranslateObject(facebookText, facebookText.hint.toString()),
+            TranslateObject(titleAnimalPage, titleAnimalPage?.text.toString()),
+            TranslateObject(numOfChildres!!, numOfChildres?.text.toString())
+        ), actionbar)).commit()
     }
 
     fun shareAnimal() {

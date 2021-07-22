@@ -86,22 +86,10 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
                 switch.setText(zooLanguage!!.getLang().toUpperCase())
                 translateObjects?.forEach { translateObjects: TranslateObject -> ZooTranslator.translate(translateObjects.text, zooLanguage!!.getLang(), translateObjects.view) }
                 if (this.actionBar != null) {
-                    this.actionBar!!.title = ZooTranslator.translate(this.actionBar!!.title.toString(), zooLanguage!!.getLang(), this.actionBar)
+                    ZooTranslator.translate(this.actionBar!!.title.toString(), zooLanguage!!.getLang(), this.actionBar)
+                    switch.isEnabled = false
                 }
             }
-            else {
-                switch.setText("EN")
-//                translateObjects?.forEach { translateObjects: TranslateObject -> ZooTranslator.translate(translateObjects.text, TranslateLanguage.ENGLISH, translateObjects.view) }
-//                if (this.actionBar != null) {
-//                    this.actionBar!!.title = ZooTranslator.translate(this.actionBar!!.title.toString(), TranslateLanguage.ENGLISH, this.actionBar)
-                var intent = Intent(context, MainPageOfAnimalChoose::class.java)
-                intent.putExtra("Language", "EN")
-                startActivity(intent)
-
-//                }
-
-            }
-
         }
 
         //return inflater.inflate(R.layout.fragment_change_language_slide, container, false)
