@@ -8,14 +8,15 @@
     tools:context="devdeeds.com.rrszoo.RecyclervView.LanguagesRecyclerView">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="398dp"
-        android:layout_height="0dp"
+        android:id="@+id/recyclerViewDetails"
+        android:layout_width="299dp"
+        android:layout_height="65dp"
         android:layout_marginTop="8dp"
-        android:text="Please add your languge  \nYou will see a button able to switch for the language you chose"
+        android:text="Please add your languge  \nYou will see a button able\n to switch for the language you chose"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/languageFragment"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,8 +30,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewDetails">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <FrameLayout
+        android:id="@+id/languageFragment"
+        android:layout_width="85dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

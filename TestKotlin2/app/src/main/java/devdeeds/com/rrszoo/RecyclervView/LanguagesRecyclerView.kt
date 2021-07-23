@@ -2,19 +2,34 @@ package devdeeds.com.rrszoo.RecyclervView
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import androidx.appcompat.app.ActionBar
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rrszoo.R
 import com.google.mlkit.nl.translate.TranslateLanguage
+import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
+import devdeeds.com.rrszoo.Kotlin.TranslateObject
 import devdeeds.com.rrszoo.Kotlin.ZooLanguage
 import kotlinx.android.synthetic.main.activity_languages_recycler_view.*
 
 
 class LanguagesRecyclerView : AppCompatActivity() {
 
+    private var translateObjectArr = arrayListOf<TranslateObject>()
+    private var actionbar: ActionBar?=null
+    var zooLanguage: ZooLanguage? = null
+    var switchStringLanguage:String?="En"
+    private var fragmentManager: FragmentManager? = null
+    private var fragmentTransaction: FragmentTransaction? = null
+    private var textDetails: TextView?=null;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_languages_recycler_view)
         val zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
+        textDetails = findViewById(R.id.recyclerViewDetails)
 
         var todoList = mutableListOf(
             DataClassOfLanguages("Afrikaans", TranslateLanguage.AFRIKAANS, zooLanguage),
@@ -82,13 +97,34 @@ class LanguagesRecyclerView : AppCompatActivity() {
         languagesRcyView1.adapter = adapter
         languagesRcyView1.layoutManager = LinearLayoutManager(this)
 
+        if (intent.getStringExtra("Language") != null)
+            switchStringLanguage = intent.getStringExtra("Language")
+
         //actionbar
-        val actionbar = supportActionBar
+        actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "Settings"
         //set back button
-        actionbar.setDisplayHomeAsUpEnabled(true)
-        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+
+
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        this.initTranslateObjectArr()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,zooLanguage!!,translateObjectArr,actionbar)).commit()
+
+
+
+    }
+
+    fun initTranslateObjectArr() {
+        translateObjectArr.clear()
+        translateObjectArr.add(TranslateObject(textDetails!!, textDetails?.text.toString()))
+//        translateObjectArr.add(TranslateObject(accountInformationSettingsButton!!, accountInformationSettingsButton?.text.toString()))
+//        translateObjectArr.add(TranslateObject(mainTitle!!, mainTitle?.text.toString()))
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -279,7 +279,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             messageToServer!!.add(childrens.text.toString())
             messageToServer!!.add(img.text.toString())
             sendInformation = SendInformation(messageToServer!!, this@MainPageOfAnimalChoose)
-            //sendInformation?.execute()
             sendInformation!!.connect()
         }
     }
@@ -319,7 +318,6 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     @SuppressLint("NewApi")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        val intent: Intent
         val logout: String
         when (id) {
             R.id.logout -> {
@@ -332,6 +330,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             }
             R.id.settings ->{
                 intent = Intent(applicationContext, Settings::class.java)
+                switchStringLanguage = zooLanguage!!.getLang();
                 intent.putExtra("Language", switchStringLanguage)
                 startActivity(intent)
             }

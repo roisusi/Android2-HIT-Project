@@ -34,10 +34,7 @@ class FirstLoginPage : AppCompatActivity() {
     var zooLanguage: ZooLanguage? = null
     private var actionbar: ActionBar?=null
     private var translateObjectArr = arrayListOf<TranslateObject>()
-
-
-
-
+    var switchStringLanguage:String?="En"
 
 
 
@@ -69,7 +66,7 @@ class FirstLoginPage : AppCompatActivity() {
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide("ChangeME",zooLanguage!!,translateObjectArr,actionbar)).commit()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,zooLanguage!!,translateObjectArr,actionbar)).commit()
 
 
     }
