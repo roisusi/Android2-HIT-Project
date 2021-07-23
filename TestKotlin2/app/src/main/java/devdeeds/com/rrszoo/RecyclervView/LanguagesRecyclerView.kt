@@ -122,7 +122,7 @@ class LanguagesRecyclerView : AppCompatActivity() {
     fun initTranslateObjectArr() {
         translateObjectArr.clear()
         translateObjectArr.add(TranslateObject(textDetails!!, textDetails?.text.toString()))
-//        translateObjectArr.add(TranslateObject(accountInformationSettingsButton!!, accountInformationSettingsButton?.text.toString()))
+        //translateObjectArr.add(TranslateObject(todoList[0]!!, accountInformationSettingsButton?.text.toString()))
 //        translateObjectArr.add(TranslateObject(mainTitle!!, mainTitle?.text.toString()))
 
     }
