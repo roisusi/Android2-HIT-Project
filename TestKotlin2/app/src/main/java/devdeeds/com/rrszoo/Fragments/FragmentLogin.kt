@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
+import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Kotlin.GetInformation
 import kotlin.collections.ArrayList
 
@@ -37,16 +38,18 @@ class FragmentLogin : Fragment {
     private var logout = false
     private var checkBoxLogin: CheckBox? = null
     private var log: String? = null
-    var isLTRLanguage: Boolean? = null
+    var isLTRLanguage = true
+    var language: String = TranslateLanguage.ENGLISH
 
     constructor() {
         // Required empty public constructor
     }
-
-    constructor(isLTRLanguage: Boolean?) {
+    constructor(isLTRLanguage: Boolean, language: String) {
         // Required empty public constructor
         this.isLTRLanguage = isLTRLanguage
+        this.language = language
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

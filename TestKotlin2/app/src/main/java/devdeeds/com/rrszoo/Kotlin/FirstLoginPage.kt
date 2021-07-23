@@ -31,8 +31,13 @@ class FirstLoginPage : AppCompatActivity() {
     private var sendInformation: SendInformation? = null
     private var fragmentLogin: FragmentLogin? = null
     private var logout: String? = null
-    private var zooLanguage: ZooLanguage? = null
+    var zooLanguage: ZooLanguage? = null
     private var actionbar: ActionBar?=null
+    private var translateObjectArr = arrayListOf<TranslateObject>()
+
+
+
+
 
 
 
@@ -46,17 +51,13 @@ class FirstLoginPage : AppCompatActivity() {
         register = findViewById<View>(R.id.registerFirstPage) as Button
         title = findViewById<View>(R.id.titleBar) as ImageView
         messageToServer = ArrayList()
-        fragmentLogin = FragmentLogin(zooLanguage?.isLTRLanguage)
+        fragmentLogin = FragmentLogin(zooLanguage?.isLTRLanguage == true,zooLanguage!!.getLang())
+
+        this.initTranslateObjectArr()
 
         //Hide the Menu Bar
         //supportActionBar!!.hide()
         logout = getIntent().getStringExtra("Logout")
-
-
-        //Make Language Fragments All the Time
-        fragmentManager = supportFragmentManager
-        fragmentTransaction = fragmentManager!!.beginTransaction()
-        //fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide()).commit()
 
 
         //actionbar
@@ -64,6 +65,19 @@ class FirstLoginPage : AppCompatActivity() {
         //set actionbar title
         actionbar!!.title = "Login Page"
 
+
+        //Make Language Fragments All the Time
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager!!.beginTransaction()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide("ChangeME",zooLanguage!!,translateObjectArr,actionbar)).commit()
+
+
+    }
+
+    fun initTranslateObjectArr() {
+        translateObjectArr.clear()
+        translateObjectArr.add(TranslateObject(login!!, login?.text.toString()))
+        translateObjectArr.add(TranslateObject(register!!, register?.text.toString()))
     }
 
     override fun onSupportNavigateUp(): Boolean {

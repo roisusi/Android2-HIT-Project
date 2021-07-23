@@ -67,8 +67,8 @@
 
     <FrameLayout
         android:id="@+id/languageFragment"
-        android:layout_width="160dp"
-        android:layout_height="67dp"
+        android:layout_width="85dp"
+        android:layout_height="37dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
