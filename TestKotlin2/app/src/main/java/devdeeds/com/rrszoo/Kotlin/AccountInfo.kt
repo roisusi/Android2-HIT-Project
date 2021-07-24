@@ -97,31 +97,5 @@ class AccountInfo : AppCompatActivity() {
         if (stringFromServer!![2] == "true") admin.text = "Yes" else admin.text = "No"
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        inflater = menuInflater
-        this.menu = menu
-        inflater!!.inflate(R.menu.change_language, menu)
-        return true
-    }
-
-    // todo: delete
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            R.id.Hebrew -> {
-                zooLanguage?.setLanguage(TranslateLanguage.HEBREW)
-                setContentView(R.layout.activity_account_info_heb)
-                setInfo(stringFromServer!!)
-                item.isChecked = true
-            }
-            R.id.English -> {
-                zooLanguage?.setLanguage(TranslateLanguage.ENGLISH)
-                setContentView(R.layout.activity_account_info)
-                setInfo(stringFromServer!!)
-                item.isChecked = true
-            }
-            else -> return super.onOptionsItemSelected(item) //react to many chooses
-        }
-        return true
-    }
+ 
 }
