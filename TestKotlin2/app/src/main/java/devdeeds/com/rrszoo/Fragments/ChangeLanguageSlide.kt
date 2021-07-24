@@ -1,6 +1,5 @@
 package devdeeds.com.rrszoo.Fragments
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,13 +11,11 @@ import android.widget.ArrayAdapter
 import android.widget.Switch
 import androidx.annotation.RequiresApi
 import com.example.rrszoo.R
-import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Kotlin.TranslateObject
 import devdeeds.com.rrszoo.Kotlin.ZooLanguage
 import devdeeds.com.rrszoo.Kotlin.ZooTranslator
 import androidx.appcompat.app.ActionBar
-import devdeeds.com.rrszoo.Kotlin.MainPageOfAnimalChoose
-import devdeeds.com.rrszoo.RecyclervView.LanguagesRecyclerView
+import devdeeds.com.rrszoo.RecyclervView.DataClassOfLanguages
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -58,8 +55,6 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
             this(switchInitialization,zooLanguage,translateObjects){
         this.actionBar = actionBar
         this.adapter = adapter
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

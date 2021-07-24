@@ -9,14 +9,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.rrszoo.R
 import com.google.mlkit.nl.translate.TranslateLanguage
 import devdeeds.com.rrszoo.Kotlin.GetInformation
+import devdeeds.com.rrszoo.Kotlin.TranslateObject
+import devdeeds.com.rrszoo.Kotlin.ZooLanguage
+import devdeeds.com.rrszoo.Kotlin.ZooTranslator
+import kotlinx.android.synthetic.main.fragment_change_language_slide.view.*
 import kotlin.collections.ArrayList
 
 /**
@@ -26,28 +28,33 @@ import kotlin.collections.ArrayList
  */
 class FragmentLogin : Fragment {
     // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
-    private var pref: SharedPreferences? = null
-    private var editor: Editor? = null
-    private var loginText: EditText? = null
-    private var passText: EditText? = null
-    private var stringFromServer: List<String>? = null
-    private var messageToServer: ArrayList<String?>? = null
-    private var getInformation: GetInformation? = null
-    private var logout = false
-    private var checkBoxLogin: CheckBox? = null
-    private var log: String? = null
-    var isLTRLanguage = true
+    var mParam1: String? = null
+    var mParam2: String? = null
+    var pref: SharedPreferences? = null
+    var editor: Editor? = null
+    var loginText: EditText? = null
+    var passText: EditText? = null
+    var stringFromServer: List<String>? = null
+    var messageToServer: ArrayList<String?>? = null
+    var getInformation: GetInformation? = null
+    var logout = false
+    var checkBoxLogin: CheckBox? = null
+    var log: String? = null
     var language: String = TranslateLanguage.ENGLISH
+    var loginButton: Button? = null
+    var backButton: Button? = null
+    var translateObjects: ArrayList<TranslateObject>? = null
+    var zooLanguage: ZooLanguage? = null
+    var languageFragment: View? = null
 
     constructor() {
         // Required empty public constructor
     }
-    constructor(isLTRLanguage: Boolean, language: String) {
+    constructor(zooLanguage: ZooLanguage, translateObjects: ArrayList<TranslateObject>, langFrag: View) {
         // Required empty public constructor
-        this.isLTRLanguage = isLTRLanguage
-        this.language = language
+        this.zooLanguage = zooLanguage
+        this.translateObjects = translateObjects
+        this.languageFragment = langFrag
     }
 
 
@@ -70,15 +77,24 @@ class FragmentLogin : Fragment {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v: View = inflater.inflate(
-            if (isLTRLanguage!!) R.layout.fragment_login else R.layout.fragment_login_heb,
-            container,
-            false
-        )
+        val v: View = inflater.inflate(R.layout.fragment_login, container, false)
         loginText = v.findViewById<View>(R.id.loginText) as EditText
         passText = v.findViewById<View>(R.id.passText) as EditText
         checkBoxLogin = v.findViewById<View>(R.id.rememberCB) as CheckBox
+        loginButton = v.findViewById(R.id.loginFrag) as Button
 
+        if (languageFragment?.swithLanguages!!.isChecked) {
+            ZooTranslator.translate(loginButton!!.text.toString(), zooLanguage?.getLang()!!, loginButton as TextView)
+            ZooTranslator.translate(loginText!!.text.toString(), zooLanguage?.getLang()!!, loginText as TextView)
+            ZooTranslator.translate(passText!!.text.toString(), zooLanguage?.getLang()!!, passText as TextView)
+            ZooTranslator.translate(checkBoxLogin!!.text.toString(), zooLanguage?.getLang()!!, checkBoxLogin as TextView)
+
+        } else {
+            translateObjects?.add(TranslateObject(loginButton!!, loginButton!!.text.toString()))
+            translateObjects?.add(TranslateObject(loginText!!, loginText!!.text.toString()))
+            translateObjects?.add(TranslateObject(passText!!, passText!!.text.toString()))
+            translateObjects?.add(TranslateObject(checkBoxLogin!!, checkBoxLogin!!.text.toString()))
+        }
         //return inflater.inflate(R.layout.fragment_login, container, false);
         return v
     }
@@ -107,7 +123,7 @@ class FragmentLogin : Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-    private fun tryLogIn() {
+    fun tryLogIn() {
         val login = pref!!.getString("login", null)
         val password = pref!!.getString("password", null)
         log = pref!!.getString("checked", null)
@@ -124,7 +140,7 @@ class FragmentLogin : Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-    private fun setLoginDetails(login: String?, password: String?, log: String?) {
+    fun setLoginDetails(login: String?, password: String?, log: String?) {
         editor!!.putString("login", login)
         editor!!.putString("password", password)
         editor!!.putString("checked", log)
@@ -155,11 +171,7 @@ class FragmentLogin : Fragment {
     fun loginToServer() {
         messageToServer = ArrayList()
         messageToServer?.clear()
-        if (isLTRLanguage!!) {
-            messageToServer?.add("En")
-        } else {
-            messageToServer?.add("He")
-        }
+        messageToServer?.add("En")
         messageToServer?.add("Login")
         messageToServer?.add(loginText!!.text.toString())
         messageToServer?.add(passText!!.text.toString())
@@ -175,8 +187,8 @@ class FragmentLogin : Fragment {
     companion object {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
+        const val ARG_PARAM1 = "param1"
+        const val ARG_PARAM2 = "param2"
 
         /**
          * Use this factory method to create a new instance of

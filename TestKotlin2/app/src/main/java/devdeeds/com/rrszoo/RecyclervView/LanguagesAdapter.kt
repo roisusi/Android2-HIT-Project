@@ -27,7 +27,8 @@ class LanguagesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         //get the next item to view
         val view = LayoutInflater.from(parent.context).inflate(R.layout.items_language_bottuns_list,parent,false)
-        return TodoViewHolder(view)
+        var todos = TodoViewHolder(view)
+        return todos
 
     }
 

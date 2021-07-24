@@ -11,6 +11,7 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.Translator
 import com.google.mlkit.nl.translate.TranslatorOptions
+import devdeeds.com.rrszoo.RecyclervView.DataClassOfLanguages
 
 class ZooTranslator {
 
@@ -50,6 +51,26 @@ class ZooTranslator {
                 }.addOnFailureListener {
                     System.out.println(it.toString())
                     array.add(str)
+                });
+            }.start()
+        }
+
+        fun translate(item: DataClassOfLanguages, lng: String) {
+            val options = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.ENGLISH)
+                .setTargetLanguage(lng)
+                .build()
+            val translator: Translator = Translation.getClient(options)
+            Thread {
+                Tasks.await(translator.downloadModelIfNeeded().addOnSuccessListener {
+                    translator.translate(item.nameOfButtonLanguage).addOnSuccessListener {
+                        item.nameOfButtonLanguage = it
+                        System.out.println(it.toString())
+                    }.addOnFailureListener {
+                        System.out.println(it.toString())
+                    }
+                }.addOnFailureListener {
+                    System.out.println(it.toString())
                 });
             }.start()
         }

@@ -17,6 +17,7 @@ import com.example.rrszoo.R
 import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Fragments.FragmentLogin
 import devdeeds.com.rrszoo.Fragments.FragmentRegister
+import kotlinx.android.synthetic.main.fragment_change_language_slide.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -48,7 +49,8 @@ class FirstLoginPage : AppCompatActivity() {
         register = findViewById<View>(R.id.registerFirstPage) as Button
         title = findViewById<View>(R.id.titleBar) as ImageView
         messageToServer = ArrayList()
-        fragmentLogin = FragmentLogin(zooLanguage?.isLTRLanguage == true,zooLanguage!!.getLang())
+        var languagefrag = findViewById<View>(R.id.languageFragment)
+        fragmentLogin = FragmentLogin(zooLanguage!!, translateObjectArr , languagefrag)
 
         this.initTranslateObjectArr()
 
@@ -86,7 +88,8 @@ class FirstLoginPage : AppCompatActivity() {
     fun registerUser(view: View?) {
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction!!.add(R.id.fragmentReg, FragmentRegister(zooLanguage?.isLTRLanguage == true)).addToBackStack(null).commit()
+        var languagefrag = findViewById<View>(R.id.languageFragment)
+        fragmentTransaction!!.add(R.id.fragmentReg, FragmentRegister(zooLanguage!!, translateObjectArr, languagefrag)).addToBackStack(null).commit()
         login!!.visibility = View.INVISIBLE
         register!!.visibility = View.INVISIBLE
         title!!.visibility = View.INVISIBLE
@@ -106,6 +109,7 @@ class FirstLoginPage : AppCompatActivity() {
         //set back button
         actionbar!!.setDisplayHomeAsUpEnabled(true)
         actionbar!!.setDisplayHomeAsUpEnabled(true)
+        this.initTranslateObjectArr()
     }
 
     ///backToMain

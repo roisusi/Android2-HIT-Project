@@ -13,6 +13,8 @@ import devdeeds.com.rrszoo.Fragments.ChangeLanguageSlide
 import devdeeds.com.rrszoo.Kotlin.TranslateObject
 import devdeeds.com.rrszoo.Kotlin.ZooLanguage
 import kotlinx.android.synthetic.main.activity_languages_recycler_view.*
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 class LanguagesRecyclerView : AppCompatActivity() {
@@ -24,6 +26,7 @@ class LanguagesRecyclerView : AppCompatActivity() {
     private var fragmentManager: FragmentManager? = null
     private var fragmentTransaction: FragmentTransaction? = null
     private var textDetails: TextView?=null;
+    private var adapter: LanguagesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +34,7 @@ class LanguagesRecyclerView : AppCompatActivity() {
         val zooLanguage = ZooLanguage(getSharedPreferences("RRsZoo", MODE_PRIVATE))
         textDetails = findViewById(R.id.recyclerViewDetails)
 
-        var todoList = mutableListOf(
+        var todoList: MutableList<DataClassOfLanguages> = arrayListOf(
             DataClassOfLanguages("Afrikaans", TranslateLanguage.AFRIKAANS, zooLanguage),
             DataClassOfLanguages("Arabic", TranslateLanguage.ARABIC, zooLanguage),
             DataClassOfLanguages("Belarusian", TranslateLanguage.BELARUSIAN, zooLanguage),
@@ -93,10 +96,13 @@ class LanguagesRecyclerView : AppCompatActivity() {
             DataClassOfLanguages("Chinese", TranslateLanguage.CHINESE, zooLanguage)
         )
 
-        var adapter = LanguagesAdapter(todoList)
+        adapter = LanguagesAdapter(todoList)
         languagesRcyView1.adapter = adapter
         languagesRcyView1.layoutManager = LinearLayoutManager(this)
 
+        Timer().schedule(3000) {
+            System.out.println(adapter!!.itemCount)
+        }
         if (intent.getStringExtra("Language") != null)
             switchStringLanguage = intent.getStringExtra("Language")
 
@@ -113,7 +119,7 @@ class LanguagesRecyclerView : AppCompatActivity() {
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
         this.initTranslateObjectArr()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,zooLanguage!!,translateObjectArr,actionbar)).commit()
+        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,zooLanguage!!, translateObjectArr, actionbar)).commit()
 
 
 
