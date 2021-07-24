@@ -100,9 +100,6 @@ class LanguagesRecyclerView : AppCompatActivity() {
         languagesRcyView1.adapter = adapter
         languagesRcyView1.layoutManager = LinearLayoutManager(this)
 
-        Timer().schedule(3000) {
-            System.out.println(adapter!!.itemCount)
-        }
         if (intent.getStringExtra("Language") != null)
             switchStringLanguage = intent.getStringExtra("Language")
 

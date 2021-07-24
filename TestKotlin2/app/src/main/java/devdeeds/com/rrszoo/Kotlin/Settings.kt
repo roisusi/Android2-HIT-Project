@@ -72,7 +72,10 @@ class Settings : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+//        onBackPressed()
+        intent = Intent (this, MainPageOfAnimalChoose::class.java)
+        intent.putExtra("Language", switchStringLanguage)
+        startActivity(intent)
         return true
     }
 
