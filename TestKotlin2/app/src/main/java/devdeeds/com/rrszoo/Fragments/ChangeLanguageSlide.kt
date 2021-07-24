@@ -91,11 +91,10 @@ class ChangeLanguageSlide(switchInitialization:String, zooLanguage: ZooLanguage?
                 translateObjects?.forEach { translateObjects: TranslateObject ->
                     run {
                         if (translateObjects.view != null) {
-                            ZooTranslator.translate(
-                                translateObjects.text,
-                                zooLanguage!!.getLang(),
-                                translateObjects.view
-                            )
+                            ZooTranslator.translate(translateObjects.text, zooLanguage!!.getLang(), translateObjects.view)
+                        }
+                        if (translateObjects.menuItem != null) {
+                            ZooTranslator.translate(translateObjects.text, zooLanguage!!.getLang(), translateObjects.menuItem)
                         }
                     }
                 }

@@ -2,6 +2,7 @@ package devdeeds.com.rrszoo.Kotlin
 
 import androidx.appcompat.app.ActionBar
 import android.os.Build
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
@@ -107,6 +108,26 @@ class ZooTranslator {
                     });
                 }.start()
             }
+        }
+
+        fun translate(str: String, lng: String, menuItem: MenuItem?) {
+            val options = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.ENGLISH)
+                .setTargetLanguage(lng)
+                .build()
+            val translator: Translator = Translation.getClient(options)
+            Thread {
+                Tasks.await(translator.downloadModelIfNeeded().addOnSuccessListener {
+                    translator.translate(str).addOnSuccessListener {
+                        menuItem?.title = it
+                        System.out.println(it.toString())
+                    }.addOnFailureListener {
+                        System.out.println(it.toString())
+                    };
+                }.addOnFailureListener {
+                    System.out.println(it.toString())
+                });
+            }.start()
         }
 
         fun translate(lng: String, button: Button?) {

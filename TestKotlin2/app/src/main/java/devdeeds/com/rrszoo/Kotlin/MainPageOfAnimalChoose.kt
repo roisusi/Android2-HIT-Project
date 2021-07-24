@@ -85,6 +85,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
 
 
 
+
         if (intent.getStringExtra("Language") != null)
             switchStringLanguage = intent.getStringExtra("Language")
 
@@ -340,7 +341,9 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         inflater = menuInflater
         this.menu = menu
         inflater!!.inflate(R.menu.menu, menu)
-
+        for (i in 0..this.menu!!.size()-1) {
+            this.translateObjectArr.add(TranslateObject(this.menu!!.getItem(i), this.menu!!.getItem(i).title.toString()))
+        }
 
         return true
     }
