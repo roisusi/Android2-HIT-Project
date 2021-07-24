@@ -11,6 +11,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.annotation.RequiresApi
@@ -106,18 +108,28 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         //set actionbar title
         actionbar!!.title = "Main Page"
         val abc = actionbar
-        this.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, arrayListOf<String>())
+        this.adapter = ArrayAdapter(
+            this,
+            R.layout.support_simple_spinner_dropdown_item,
+            arrayListOf<String>()
+        )
         //Make Language Fragments All the Time
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager!!.beginTransaction()
-        Log.e(TAG, "Main Page $switchStringLanguage", )
+        Log.e(TAG, "Main Page $switchStringLanguage")
         this.initTranslateObjectArr()
-        fragmentTransaction!!.add(R.id.languageFragment, ChangeLanguageSlide(switchStringLanguage!!,
-            zooLanguage!!,
-            translateObjectArr,
-            abc,
-            adapter!!
-        )).commit()
+        fragmentTransaction!!.add(
+            R.id.languageFragment, ChangeLanguageSlide(
+                switchStringLanguage!!,
+                zooLanguage!!,
+                translateObjectArr,
+                abc,
+                adapter!!
+            )
+        ).commit()
+
+
+
 
         //todd: implement this and tanslate nav
         menuInflater
@@ -145,9 +157,14 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     fun animalSelection(view: View) {
         fragmentManager = supportFragmentManager
-        fragmentAnimalPage = FragmentAnimals(zooLanguage?.isLTRLanguage == true, zooLanguage!!.getLang())
+        fragmentAnimalPage = FragmentAnimals(
+            zooLanguage?.isLTRLanguage == true,
+            zooLanguage!!.getLang()
+        )
         val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.add(R.id.animalFrag, fragmentAnimalPage as FragmentAnimals).addToBackStack(null).commit()
+        fragmentTransaction.add(R.id.animalFrag, fragmentAnimalPage as FragmentAnimals).addToBackStack(
+            null
+        ).commit()
         fragmentManager!!.executePendingTransactions()
         if (zooLanguage?.isLTRLanguage == true) {
             when (view.id) {
@@ -167,6 +184,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             }
         }
 
+
         //set back button
         actionbar!!.setDisplayHomeAsUpEnabled(true)
         actionbar!!.setDisplayHomeAsUpEnabled(true)
@@ -183,6 +201,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         supportActionBar!!.show()
         actionbar!!.setDisplayHomeAsUpEnabled(false)
         actionbar!!.setDisplayHomeAsUpEnabled(false)
+
     }
 
 
@@ -222,7 +241,11 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         fab!!.visibility = View.INVISIBLE
         val language: View = findViewById(R.id.languageFragment)
         if (language.swithLanguages.isChecked) {
-            types!!.forEach { type -> ZooTranslator.translate(type!!, zooLanguage!!.getLang(), adapter!!) }
+            types!!.forEach { type -> ZooTranslator.translate(
+                type!!,
+                zooLanguage!!.getLang(),
+                adapter!!
+            ) }
         } else {
             adapter!!.addAll(types!!)
         }
@@ -235,7 +258,9 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         if (zooLanguage?.isLTRLanguage == true) {
             fragmentTransaction.add(R.id.addAnimalFrag, fragmentAddAnimalal!!).addToBackStack(null).commit()
         } else {
-            fragmentTransaction.replace(R.id.addAnimalFragHeb, fragmentAddAnimalal!!).addToBackStack(null).commit()
+            fragmentTransaction.replace(R.id.addAnimalFragHeb, fragmentAddAnimalal!!).addToBackStack(
+                null
+            ).commit()
         }
         fab!!.visibility = View.INVISIBLE
         imageView!!.visibility = View.INVISIBLE
@@ -290,7 +315,12 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
             ZooTranslator.translate(zooLanguage!!.getLang(), selectAnimalButton)
         } else {
             this.initTranslateObjectArr()
-            translateObjectArr.add(TranslateObject(selectAnimalButton!!, selectAnimalButton!!.text.toString()))
+            translateObjectArr.add(
+                TranslateObject(
+                    selectAnimalButton!!,
+                    selectAnimalButton!!.text.toString()
+                )
+            )
         }
         selectAnimalButton!!.setOnClickListener {
             val intent = Intent(applicationContext, AnimalPage::class.java)
@@ -328,7 +358,7 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
                 editor!!.apply()
                 startActivity(intent)
             }
-            R.id.settings ->{
+            R.id.settings -> {
                 intent = Intent(applicationContext, Settings::class.java)
                 switchStringLanguage = zooLanguage!!.getLang();
                 intent.putExtra("Language", switchStringLanguage)
@@ -353,7 +383,11 @@ class MainPageOfAnimalChoose() : AppCompatActivity(), OnItemSelectedListener{
         alertDialogBuilder.setMessage("One or More cells are empty")
         alertDialogBuilder.setPositiveButton(
             "Ok"
-        ) { arg0, arg1 -> Toast.makeText(this@MainPageOfAnimalChoose, "Fill all Text", Toast.LENGTH_LONG).show() }
+        ) { arg0, arg1 -> Toast.makeText(
+            this@MainPageOfAnimalChoose,
+            "Fill all Text",
+            Toast.LENGTH_LONG
+        ).show() }
 
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()

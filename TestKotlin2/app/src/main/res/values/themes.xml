@@ -3,7 +3,7 @@
     <style name="Theme.RRsZoo" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#D0299591</item>
+        <item name="colorPrimary">#D0567B8A</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
